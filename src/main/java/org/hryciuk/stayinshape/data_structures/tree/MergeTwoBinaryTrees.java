@@ -34,39 +34,54 @@ import java.util.Stack;
  * Note: The merging process must start from the root nodes of both trees.
  */
 public class MergeTwoBinaryTrees {
+
+    // iterative
     public TreeNode mergeTrees(TreeNode t1, TreeNode t2) {
-        Stack<TreeNode> stack = new Stack<>();
-        if (t1 != null && t2 != null) {
-            stack.push(t2);
-            stack.push(t1);
-        } else if (t1 != null) {
-            return t1;
-        } else {
+        if (t1 == null) {
             return t2;
         }
-
+        TreeNode[] pairOfNodes = new TreeNode[] {t1, t2};
+        Stack<TreeNode[]> stack = new Stack<>();
+        stack.push(pairOfNodes);
         while (!stack.isEmpty()) {
-            TreeNode firstRoot = stack.pop();
-            TreeNode secondRoot = stack.pop();
-            if (firstRoot == null && secondRoot == null) {
+            TreeNode[] poppedPair = stack.pop();
+            if (poppedPair[0] == null || poppedPair[1] == null) {
                 continue;
             }
-            int sumOfRootValues = (firstRoot != null ? firstRoot.val : 0) + (secondRoot != null ? secondRoot.val : 0);
-            if (firstRoot == null) {
-                firstRoot = secondRoot;
+            int sum = poppedPair[0].val + poppedPair[1].val;
+            poppedPair[0].val = sum;
+            if (poppedPair[0].left == null) {
+                poppedPair[0].left = poppedPair[1].left;
+            } else {
+                stack.push(new TreeNode[] {poppedPair[0].left, poppedPair[1].left});
             }
-            firstRoot.val = sumOfRootValues;
-            if (firstRoot.left == null) {
-                firstRoot.left = secondRoot != null ? secondRoot.left : null;
+            if (poppedPair[0].right == null) {
+                poppedPair[0].right = poppedPair[1].right;
+            } else {
+                stack.push(new TreeNode[] {poppedPair[0].right, poppedPair[1].right});
             }
-            stack.push(secondRoot != null ? secondRoot.left : null);
-            stack.push(firstRoot.left);
-            if (firstRoot.right == null) {
-                firstRoot.right = secondRoot != null ? secondRoot.right : null;
-
-            }
-
         }
-        return t2;
+        return t1;
     }
+
+    // recursive
+    public TreeNode mergeTreesRecursively(TreeNode t1, TreeNode t2) {
+        if (t1 == null && t2 == null) {
+            return null;
+        }
+        if (t1 == null) {
+            return t2;
+        }
+        if (t2 == null) {
+            return t1;
+        }
+        int sum = (t1.val != null ? t1.val : 0) + (t2.val != null ? t2.val : 0);
+        t1.val = sum;
+        TreeNode leftSubtree = mergeTreesRecursively(t1.left, t2.left);
+        TreeNode rightSubtree = mergeTreesRecursively(t1.right, t2.right);
+        t1.left = leftSubtree;
+        t1.right = rightSubtree;
+        return t1;
+    }
+
 }

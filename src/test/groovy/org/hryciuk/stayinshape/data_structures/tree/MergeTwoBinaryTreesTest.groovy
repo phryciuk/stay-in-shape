@@ -12,7 +12,7 @@ class MergeTwoBinaryTreesTest extends Specification {
 
         when:
         MergeTwoBinaryTrees mergeTwoBinaryTrees = new MergeTwoBinaryTrees();
-        TreeNode actual = mergeTwoBinaryTrees.mergeTrees(firstOne, secondOne);
+        TreeNode actual = mergeTwoBinaryTrees.mergeTreesRecursively(firstOne, secondOne);
 
         then:
         actual == createFromArray(expectedResult)
