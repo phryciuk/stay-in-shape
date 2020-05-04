@@ -1,5 +1,7 @@
 package org.hryciuk.stayinshape.data_structures.tree;
 
+import java.util.Stack;
+
 /**
  * 700. Search in a Binary Search Tree
  * Easy
@@ -42,5 +44,26 @@ public class SearchInBST {
             return searchBST(root.left, val);
         }
         return searchBST(root.right, val);
+    }
+
+    public TreeNode searchBSTIteratively(TreeNode root, int val) {
+        if (root == null) {
+            return null;
+        }
+        Stack<TreeNode> stack = new Stack<>();
+        stack.push(root);
+        while (!stack.isEmpty()) {
+            TreeNode popped = stack.pop();
+            if (popped == null) {
+                continue;
+            }
+            if (popped.val == val)
+                return popped;
+            if (val < popped.val) {
+                stack.push(popped.left);
+            }
+            stack.push(popped.right);
+        }
+        return null;
     }
 }
