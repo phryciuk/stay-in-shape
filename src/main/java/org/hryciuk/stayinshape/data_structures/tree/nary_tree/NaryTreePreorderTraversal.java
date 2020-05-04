@@ -1,9 +1,6 @@
 package org.hryciuk.stayinshape.data_structures.tree.nary_tree;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 /**
  * 589. N-ary Tree Preorder Traversal
@@ -57,6 +54,7 @@ class Node {
 */
 public class NaryTreePreorderTraversal {
 
+    // recursive
     public List<Integer> preorder(Node root) {
         if (root == null) {
             return new ArrayList<>();
@@ -70,6 +68,33 @@ public class NaryTreePreorderTraversal {
             preorder.addAll(childPreOrder);
         }
         return preorder;
+    }
+
+    // iterative
+    public List<Integer> preorderIterative(Node root) {
+        if (root == null) {
+            return new ArrayList<>();
+        }
+        List<Integer> result = new LinkedList<>();
+        Stack<Node> stack = new Stack<>();
+        stack.push(root);
+        while (!stack.isEmpty()) {
+            Node popped = stack.pop();
+            if (popped != null) {
+                result.add(popped.val);
+                if (popped.children != null) {
+                    LinkedList<Node> queue = new LinkedList<>();
+                    for (Node n : popped.children) {
+                        queue.push(n);
+                    }
+                    while (!queue.isEmpty()) {
+                        Node firstChildInQueue = queue.removeFirst();
+                        stack.push(firstChildInQueue);
+                    }
+                }
+            }
+        }
+        return result;
     }
 
 }
