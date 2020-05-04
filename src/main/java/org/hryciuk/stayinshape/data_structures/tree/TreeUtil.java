@@ -16,10 +16,12 @@ class TreeUtil {
     while (count < array.length && !queue.isEmpty()) {
       TreeNode node = queue.poll();
       if (node != null) {
-        node.left = new TreeNode(array[count++]);
+        Integer val = array[count++];
+        node.left = val != null ? new TreeNode(val) : null;
         queue.add(node.left);
         if (count < array.length) {
-          node.right = new TreeNode(array[count++]);
+          Integer val1 = array[count++];
+          node.right = val1 != null ? new TreeNode(val1) : null;
           queue.add(node.right);
         }
       }

@@ -4,11 +4,11 @@ import java.util.Objects;
 
 class TreeNode {
 
-    Integer val;
+    int val;
     TreeNode left;
     TreeNode right;
 
-    TreeNode(Integer val) {
+    TreeNode(int val) {
         this.val = val;
     }
 

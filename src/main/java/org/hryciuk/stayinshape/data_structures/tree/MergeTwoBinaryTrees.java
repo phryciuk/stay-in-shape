@@ -75,7 +75,7 @@ public class MergeTwoBinaryTrees {
         if (t2 == null) {
             return t1;
         }
-        int sum = (t1.val != null ? t1.val : 0) + (t2.val != null ? t2.val : 0);
+        int sum =  t1.val  + t2.val;
         t1.val = sum;
         TreeNode leftSubtree = mergeTreesRecursively(t1.left, t2.left);
         TreeNode rightSubtree = mergeTreesRecursively(t1.right, t2.right);
