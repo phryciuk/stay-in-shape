@@ -6,10 +6,13 @@ class PalindromePartitioning2Test extends Specification {
 
     def "should return minimum number of cuts so that string is partitioned into palindromes"(String input, int expectedCuts) {
         given:
+        PalindromePartitioning2 palindromePartitioning2 = new PalindromePartitioning2()
 
         when:
+        def actual = palindromePartitioning2.minCut(input)
 
         then:
+        expectedCuts == actual
 
         where:
         input         | expectedCuts

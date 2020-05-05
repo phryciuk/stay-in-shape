@@ -1,5 +1,9 @@
 package org.hryciuk.stayinshape.strings;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * 132. Palindrome Partitioning II
  * Hard
@@ -16,20 +20,34 @@ package org.hryciuk.stayinshape.strings;
  */
 public class PalindromePartitioning2 {
 
+    private Map<String, Integer> minimumNumberOfCuts = new HashMap<>();
+
     public int minCut(String s) {
         if (s == null || s.isEmpty()) {
             return 0;
         }
-        if (s.length() == 1) {
-            return 0;
-        }
-        char[] chars = s.toCharArray();
-        int[] minimumCuts = new int[s.length()];
-        minimumCuts[0] = 0;
-//        for (int i = 1; i < chars.length; ++i) {
-//
-//        }
+        decompose(s, 0, new ArrayList<>());
         return 1;
+    }
+
+    private void decompose(String s, int index, ArrayList<String> temp) {
+        if (index == s.length()) {
+            temp.forEach(val -> minimumNumberOfCuts.put(val, 0));
+        }
+        for (int i = index; i < s.length(); ++i) {
+            String substring = s.substring(index, i);
+            if (isPalindrome(substring)) {
+                temp.add(substring);
+                decompose(s, index + 1, temp);
+                temp.remove(temp.size() - 1);
+            } else {
+//                char[] charArray = substring.toCharArray();
+                for (int j = 0; j < substring.length(); ++j) {
+                    String substringOfASubstring = substring.substring(0, j);
+                    minimumNumberOfCuts.putIfAbsent(substringOfASubstring, 1);
+                }
+            }
+        }
     }
 
     private boolean isPalindrome(String toTest) {
