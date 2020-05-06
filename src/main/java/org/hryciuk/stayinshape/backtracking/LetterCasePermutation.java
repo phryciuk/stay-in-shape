@@ -9,20 +9,30 @@ public class LetterCasePermutation {
             return new ArrayList<>();
         }
         List<String> result = new ArrayList<>();
-        permute(s, result, "");
-        return new ArrayList<>();
+        permute(s, result, 0);
+        return result;
     }
 
-    private void permute(String s, List<String> result, String temp) {
-
-        for (int i = 0; i < s.length(); i++) {
+    private void permute(String s, List<String> result, int position) {
+        if (position == s.length() && !result.contains(s)) {
+            result.add(s);
+        }
+        for (int i = position; i < s.length(); i++) {
             if (!Character.isDigit(s.charAt(i))) {
-                String first = Character.toUpperCase(s.charAt(i)) + s.substring(i + 1);
-                temp += first;
-                String second = Character.toLowerCase(s.charAt(i)) + s.substring(i + 1);
-                result.add(first);
-                result.add(second);
+                String first = s.substring(0, i) + Character.toUpperCase(s.charAt(i)) + s.substring(i + 1);
+                if (!first.equals(s)) {
+                    permute(first, result, i + 1);
+                }
+                String second = s.substring(0, i) + Character.toLowerCase(s.charAt(i)) + s.substring(i + 1);
+                if (!second.equals(s)) {
+                    permute(second, result, i + 1);
+                }
+            } else {
+                permute(s, result, i + 1);
             }
+        }
+        if (!result.contains(s)) {
+            result.add(s);
         }
     }
 }
