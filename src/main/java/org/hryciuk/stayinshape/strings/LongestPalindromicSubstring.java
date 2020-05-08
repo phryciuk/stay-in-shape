@@ -19,7 +19,6 @@ package org.hryciuk.stayinshape.strings;
  */
 public class LongestPalindromicSubstring {
 
-
     // Time: O(n^2), Space O(1)
     public String expandFromTheMiddle(String s) {
         if (s == null || s.isEmpty()) {
@@ -42,6 +41,43 @@ public class LongestPalindromicSubstring {
             }
         }
         return s.substring(start, end + 1);
+    }
+
+    // Time: O(n^2), Space O(n^2)
+    public String longestPalindromicSubstringDynamicProgramming(String s) {
+        if (s == null || s.isEmpty()) {
+            return "";
+        }
+        if (s.length() == 1) {
+            return s;
+        }
+        int longestPalindromicSubstringStart = 0;
+        int longestPalindromicSubstringEnd = 0;
+        int stringLength = s.length();
+        boolean[][] isPalindrome = new boolean[stringLength][stringLength];
+        // setting up diagonal of an array; length == 1
+        for (int i = 0; i < s.length(); ++i) {
+            isPalindrome[i][i] = true;
+        }
+        // length == 2
+        for (int i = 0; i + 1 < s.length(); ++i) {
+            if (s.charAt(i) == s.charAt(i + 1)) {
+                isPalindrome[i][i + 1] = true;
+                longestPalindromicSubstringStart = i;
+                longestPalindromicSubstringEnd = i + 1;
+            }
+        }
+        // length >= 3
+        for (int j = 2; j < s.length(); ++j) {
+            for (int i = 0; i < s.length() - j; ++i) {
+                if ((s.charAt(i) == s.charAt(j + i)) && isPalindrome[i + 1][j + i - 1]) {
+                    isPalindrome[i][j + i] = true;
+                    longestPalindromicSubstringStart = i;
+                    longestPalindromicSubstringEnd = j + i;
+                }
+            }
+        }
+        return s.substring(longestPalindromicSubstringStart, longestPalindromicSubstringEnd + 1);
     }
 
     private int checkLongestPalindromeFromMiddle(String s, int left, int right) {

@@ -8,18 +8,21 @@ class LongestPalindromicSubstringTest extends Specification {
         LongestPalindromicSubstring longestPalindromicSubstring = new LongestPalindromicSubstring()
 
         when:
-        def actual = longestPalindromicSubstring.expandFromTheMiddle(input)
+        def actual = longestPalindromicSubstring.longestPalindromicSubstringDynamicProgramming(input)
 
         then:
         expectedLongestPalindromicSubstring == actual
 
         where:
-        input   | expectedLongestPalindromicSubstring
-        "abba"  | "abba"
-        "babad" | "bab"
-        "babad" | "aba"
-        "cbbd"  | "bb"
-        "a"     | "a"
-        "bb"    | "bb"
+        input                                                                                           | expectedLongestPalindromicSubstring
+        "abba"                                                                                          | "abba"
+        "babad"                                                                                         | "bab"
+        "babad"                                                                                         | "aba"
+        "cbbd"                                                                                          | "bb"
+        "a"                                                                                             | "a"
+        "bb"                                                                                            | "bb"
+        "jppppp"                                                                                        | "ppppp"
+        "flkjdashkjfhsakjhdjfjdjiiiiiwoeriiurpweiuqpiujksdfjhvcxjjjjsdkjhaskjdhkashjdkjahqoqpppppppppp" | "pppppppppp"
+
     }
 }
