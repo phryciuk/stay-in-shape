@@ -1,7 +1,6 @@
 package org.hryciuk.stayinshape.backtracking;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
