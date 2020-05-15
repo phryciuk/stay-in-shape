@@ -42,14 +42,10 @@ public class BinaryTreeInOrderTraversal {
             return result;
         }
         List<Integer> leftSubtree = inorderTraversal(root.left);
-        if (leftSubtree != null) {
-            result.addAll(leftSubtree);
-        }
+        result.addAll(leftSubtree);
         result.add(root.val);
         List<Integer> rightSubtree = inorderTraversal(root.right);
-        if (rightSubtree != null) {
-            result.addAll(rightSubtree);
-        }
+        result.addAll(rightSubtree);
         return result;
     }
 }
