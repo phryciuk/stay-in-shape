@@ -41,4 +41,31 @@ public class MaxHeap {
         }
         return result;
     }
+
+    public void removeFromHeap() {
+        ensureCapacity();
+        int rootValue = heap[0];
+        int lastElement = heap[size - 1];
+        heap[size - 1] = rootValue;
+        heap[0] = lastElement;
+        int currentRootIndex = 0;
+        int leftChildIndex = 1;
+        int rightChildIndex = 2;
+        while ((leftChildIndex <= size - 1 && rightChildIndex <=size - 1) && (lastElement <= heap[leftChildIndex] || lastElement <= heap[rightChildIndex])) {
+            if (heap[leftChildIndex] > heap[rightChildIndex]) {
+                int leftChildValue = heap[leftChildIndex];
+                heap[leftChildIndex] = heap[currentRootIndex];
+                heap[currentRootIndex] = leftChildValue;
+                currentRootIndex = leftChildIndex;
+            } else {
+                int rightChildValue = heap[rightChildIndex];
+                heap[rightChildIndex] = heap[currentRootIndex];
+                heap[currentRootIndex] = rightChildValue;
+                currentRootIndex = rightChildIndex;
+            }
+            leftChildIndex = currentRootIndex * 2 + 1;
+            rightChildIndex = currentRootIndex * 2 + 2;
+        }
+        size--;
+    }
 }
