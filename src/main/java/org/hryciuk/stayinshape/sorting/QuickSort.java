@@ -7,34 +7,35 @@ class QuickSort {
         this.array = array;
     }
 
-    void quickSort(int p, int r) {
-        if (p < r) {
-            int q = partition(p, r);
-            quickSort(p, q - 1);
-            quickSort(q + 1, r);
+    public void quickSort(int low, int high) {
+        if (low < high) {
+            int index = partition(low, high);
+            quickSort(low, index - 1);
+            quickSort(index + 1, high);
         }
     }
 
-    private int partition(int p, int r) {
-        int pivot = array[r];
-        int i = p - 1;
-        for (int j = p; j < r; j++) {
+    int partition(int low, int high) {
+        int pivot = array[high];
+        int i = low - 1;
+
+        for (int j = low; j < high; ++j) {
             if (array[j] <= pivot) {
-                i++;
+                ++i;
                 swap(i, j);
             }
         }
-        swap(i + 1, r);
-
-        // Return the index of where the pivot ended up.
-        return i + 1;
+        i++;
+        swap(i, high);
+        return i;
     }
 
     private void swap(int i, int j) {
-        int t = array[i];
+        int toReplace = array[i];
         array[i] = array[j];
-        array[j] = t;
+        array[j] = toReplace;
     }
+
 
     public int[] getArray() {
         return array;
