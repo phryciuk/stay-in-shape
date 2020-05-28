@@ -1,6 +1,6 @@
 package org.hryciuk.stayinshape.data_structures.array
 
-import org.hryciuk.stayinshape.data_structures.MaximumAverageSubarrayI
+
 import spock.lang.Specification
 
 class MaximumAverageSubarrayITest extends Specification {

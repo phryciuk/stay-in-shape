@@ -1,4 +1,4 @@
-package org.hryciuk.stayinshape.data_structures;
+package org.hryciuk.stayinshape.data_structures.array;
 
 /**
  * 643. Maximum Average Subarray I
