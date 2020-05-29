@@ -18,6 +18,5 @@ class MaximumSubarrayOfSizeKTest extends Specification {
         input              | k || expected
         [2, 1, 5, 1, 3, 2] | 3 || 9
         [2, 3, 4, 1, 5]    | 2 || 7
-
     }
 }
