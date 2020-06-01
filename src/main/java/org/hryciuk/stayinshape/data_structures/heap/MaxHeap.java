@@ -48,24 +48,40 @@ public class MaxHeap {
         int lastElement = heap[size - 1];
         heap[size - 1] = rootValue;
         heap[0] = lastElement;
-        int currentRootIndex = 0;
-        int leftChildIndex = 1;
-        int rightChildIndex = 2;
-        while ((leftChildIndex <= size - 1 && rightChildIndex <=size - 1) && (lastElement <= heap[leftChildIndex] || lastElement <= heap[rightChildIndex])) {
-            if (heap[leftChildIndex] > heap[rightChildIndex]) {
-                int leftChildValue = heap[leftChildIndex];
-                heap[leftChildIndex] = heap[currentRootIndex];
-                heap[currentRootIndex] = leftChildValue;
-                currentRootIndex = leftChildIndex;
-            } else {
-                int rightChildValue = heap[rightChildIndex];
-                heap[rightChildIndex] = heap[currentRootIndex];
-                heap[currentRootIndex] = rightChildValue;
-                currentRootIndex = rightChildIndex;
-            }
-            leftChildIndex = currentRootIndex * 2 + 1;
-            rightChildIndex = currentRootIndex * 2 + 2;
-        }
+        maxHeapify(this.heap, 0);
         size--;
     }
+
+    // O(n)
+    static int[] buildMaxHeap(int[] array) {
+        for (int i = array.length / 2; i >= 0; i--) {
+            maxHeapify(array, i);
+        }
+        return array;
+    }
+
+    // O(n)
+    static void maxHeapify(int[] array, int i) {
+        int leftChildIndex = i * 2 + 1;
+        int rightChildIndex = i * 2 + 2;
+        int largest = i;
+        if (leftChildIndex < array.length && array[leftChildIndex] > array[largest]) {
+            largest = leftChildIndex;
+        }
+        if (rightChildIndex < array.length && array[rightChildIndex] > array[largest]) {
+            largest = rightChildIndex;
+        }
+        if (largest != i) {
+            swap(i, largest, array);
+            maxHeapify(array, largest);
+        }
+    }
+
+    // O(1)
+    static void swap(int current, int other, int[] array) {
+        int toSwapWith = array[other];
+        array[other] = array[current];
+        array[current] = toSwapWith;
+    }
+
 }

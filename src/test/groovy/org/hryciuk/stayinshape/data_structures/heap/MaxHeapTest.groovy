@@ -27,4 +27,16 @@ class MaxHeapTest extends Specification {
         then:
         maxHeap.getHeap() == [35, 15, 30, 5, 10, 25]
     }
+
+    def 'should max-heapify an array'(int[] input, int[] expected) {
+        when:
+        int[] actual = MaxHeap.buildMaxHeap(input);
+
+        then:
+        Arrays.equals(actual, expected)
+
+        where:
+        input                       | expected
+        [5, 10, 30, 20, 35, 40, 15] | [40, 35, 30, 20, 10, 5, 15]
+    }
 }
