@@ -16,7 +16,7 @@ class PalindromePartitioning2Test extends Specification {
 
         where:
         input         | expectedCuts
-        "aab"         | 2
+        "aab"         | 1
         "abbac"       | 1
         "abba"        | 0
         "piotrek"     | 6

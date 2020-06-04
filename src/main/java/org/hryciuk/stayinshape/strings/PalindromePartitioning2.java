@@ -7,47 +7,49 @@ import java.util.Map;
 /**
  * 132. Palindrome Partitioning II
  * Hard
- *
+ * <p>
  * Given a string s, partition s such that every substring of the partition is a palindrome.
- *
+ * <p>
  * Return the minimum cuts needed for a palindrome partitioning of s.
- *
+ * <p>
  * Example:
- *
+ * <p>
  * Input: "aab"
  * Output: 1
  * Explanation: The palindrome partitioning ["aa","b"] could be produced using 1 cut.
  */
 public class PalindromePartitioning2 {
 
-    private Map<String, Integer> minimumNumberOfCuts = new HashMap<>();
-
+    // Time: O(n^3); Space: O(n^2)
     public int minCut(String s) {
         if (s == null || s.isEmpty()) {
             return 0;
         }
-        decompose(s, 0, new ArrayList<>());
-        return 1;
-    }
-
-    private void decompose(String s, int index, ArrayList<String> temp) {
-        if (index == s.length()) {
-            temp.forEach(val -> minimumNumberOfCuts.put(val, 0));
+        // initializing the array of whether a substring is palindromic
+        boolean[][] isPalindrome = new boolean[s.length()][s.length()];
+        for (int i = 0; i < s.length(); ++i) {
+            for (int j = i; j < s.length(); ++j) {
+                isPalindrome[i][j] = isPalindrome(s.substring(i, j + 1));
+            }
         }
-        for (int i = index; i < s.length(); ++i) {
-            String substring = s.substring(index, i);
-            if (isPalindrome(substring)) {
-                temp.add(substring);
-                decompose(s, index + 1, temp);
-                temp.remove(temp.size() - 1);
+        // initialize the array that will hold the number of cuts
+        int[] cuts = new int[s.length()];
+        for (int i = 0; i < cuts.length; ++i) {
+            cuts[i] = i;
+        }
+
+        for (int i = 0; i < s.length(); ++i) {
+            if (isPalindrome[0][i]) {
+                cuts[i] = 0;
             } else {
-//                char[] charArray = substring.toCharArray();
-                for (int j = 0; j < substring.length(); ++j) {
-                    String substringOfASubstring = substring.substring(0, j);
-                    minimumNumberOfCuts.putIfAbsent(substringOfASubstring, 1);
+                for (int j = 0; j <= i; ++j) {
+                    if (isPalindrome[j][i]) {
+                        cuts[i] = Math.min(cuts[j - 1] + 1, cuts[i]);
+                    }
                 }
             }
         }
+        return cuts[s.length() - 1];
     }
 
     private boolean isPalindrome(String toTest) {
