@@ -41,11 +41,14 @@ public class DecompressRunLengthEncodedList {
     public int[] decompressRLElist(int[] nums) {
         List<Integer> result = new ArrayList<>();
         for (int i = 0; i < nums.length; i += 2) {
-            int j = i + 1;
-            for (int k = 0; k < nums[i]; ++k) {
-                result.add(nums[j]);
+            for (int j = 0; j < nums[i]; ++j) {
+                result.add(nums[i + 1]);
             }
         }
+        return convertToArray(result);
+    }
+
+    private int[] convertToArray(List<Integer> result) {
         int[] resultantArray = new int[result.size()];
         for (int i = 0; i < result.size(); ++i) {
             resultantArray[i] = result.get(i);

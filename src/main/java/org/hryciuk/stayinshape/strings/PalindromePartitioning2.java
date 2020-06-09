@@ -1,9 +1,5 @@
 package org.hryciuk.stayinshape.strings;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-
 /**
  * 132. Palindrome Partitioning II
  * Hard
@@ -20,25 +16,51 @@ import java.util.Map;
  */
 public class PalindromePartitioning2 {
 
-    // Time: O(n^3); Space: O(n^2)
+    // Time: O(n^2); Space: O(n^2)
     public int minCut(String s) {
         if (s == null || s.isEmpty()) {
             return 0;
         }
         // initializing the array of whether a substring is palindromic
-        boolean[][] isPalindrome = new boolean[s.length()][s.length()];
-        for (int i = 0; i < s.length(); ++i) {
-            for (int j = i; j < s.length(); ++j) {
-                isPalindrome[i][j] = isPalindrome(s.substring(i, j + 1));
-            }
-        }
-        // initialize the array that will hold the number of cuts
-        int[] cuts = new int[s.length()];
-        for (int i = 0; i < cuts.length; ++i) {
-            cuts[i] = i;
+        int n = s.length();
+        boolean[][] isPalindrome = new boolean[n][n];
+
+        // we can observe a thing about a palindrome:
+        // palindrome is a palindrome only when first and last character match && inner characters form a palindrome
+
+        // strings with length of 1; all single characters are in fact palindromes.
+        for (int i = 0; i < n; ++i) {
+            isPalindrome[i][i] = true;
         }
 
-        for (int i = 0; i < s.length(); ++i) {
+        // strings with length of 2 are palindromic if edge letters (so in fact only letters) are same
+        for (int i = 0; i < n - 1; ++i) {
+            int j = i + 1;
+            if (s.charAt(i) == s.charAt(j)) {
+                isPalindrome[i][j] = true;
+            }
+        }
+
+        // for string with length >= 3
+        // palindrome is a palindrome only when first and last character match && inner characters form a palindrome
+        for (int k = 3; k <= n; ++k) {
+            for (int i = 0; i < n - k + 1; ++i) {
+                // Get the ending index of substring from starting index i and length k
+                int j = i + k - 1;
+                // checking for sub-string from ith index to jth index if str.charAt(i+1) to str.charAt(j-1) is a palindrome
+                if (s.charAt(i) == s.charAt(j) && isPalindrome[i + 1][j - 1]) {
+                    isPalindrome[i][j] = true;
+                }
+            }
+        }
+
+        // we initialize the cuts array; this will store the minimum cuts; index i means minimum cuts in a substring[0...i];
+        int[] cuts = new int[n];
+        for (int i = 0; i < n; ++i) {
+            cuts[i] = Integer.MAX_VALUE;
+        }
+
+        for (int i = 0; i < n; ++i) {
             if (isPalindrome[0][i]) {
                 cuts[i] = 0;
             } else {
@@ -49,22 +71,8 @@ public class PalindromePartitioning2 {
                 }
             }
         }
-        return cuts[s.length() - 1];
+        return cuts[n - 1];
     }
 
-    private boolean isPalindrome(String toTest) {
-        if (toTest == null || toTest.isEmpty()) {
-            return false;
-        }
-        if (toTest.length() == 1) {
-            return true;
-        }
-        char[] chars = toTest.toCharArray();
-        for (int i = 0; i < chars.length / 2; ++i) {
-            if (chars[i] != chars[chars.length - 1 - i]) {
-                return false;
-            }
-        }
-        return true;
-    }
+
 }

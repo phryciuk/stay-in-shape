@@ -18,10 +18,10 @@ class PalindromePartitioning2Test extends Specification {
         input         | expectedCuts
         "aab"         | 1
         "abbac"       | 1
+        "banana"      | 1
+        "efe"         | 0
         "abba"        | 0
         "piotrek"     | 6
         "abrakadabra" | 8
-
-
     }
 }
