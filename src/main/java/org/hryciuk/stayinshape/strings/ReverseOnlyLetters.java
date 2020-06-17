@@ -1,5 +1,7 @@
 package org.hryciuk.stayinshape.strings;
 
+import java.util.Stack;
+
 /**
  * 917. Reverse Only Letters
  * Easy
@@ -47,6 +49,32 @@ public class ReverseOnlyLetters {
             }
         }
         return new String(chars);
+    }
+
+    // Time: O(n)
+    // Space: O(n)
+    public String reverseOnlyLettersUsingStack(String S) {
+        // push the letters on the stack so we can easily revert them later on
+        char[] chars = S.toCharArray();
+        Stack<Character> stack = new Stack<>();
+        for (int i = 0; i < chars.length; ++i) {
+            if (Character.isLetter(chars[i])) {
+                stack.push(chars[i]);
+            }
+        }
+
+        // another iteration; if element is not a letter we leave it as it is,
+        // if it is a letter then we replace it with the peek of a stack
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int i = 0; i < chars.length; ++i) {
+            char current = chars[i];
+            if (!Character.isLetter(current)) {
+                stringBuilder.append(current);
+            } else {
+                stringBuilder.append(stack.pop());
+            }
+        }
+        return stringBuilder.toString();
     }
 
 }

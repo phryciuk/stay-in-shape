@@ -9,7 +9,7 @@ class ReverseOnlyLettersTest extends Specification {
         ReverseOnlyLetters reverseOnlyLetters = new ReverseOnlyLetters()
 
         when:
-        String actual = reverseOnlyLetters.reverseOnlyLetters(input)
+        String actual = reverseOnlyLetters.reverseOnlyLettersUsingStack(input)
 
         then:
         actual == expected
