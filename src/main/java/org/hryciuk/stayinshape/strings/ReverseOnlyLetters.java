@@ -33,12 +33,12 @@ public class ReverseOnlyLetters {
         // we iterate with 2 pointers, one at start, one at end
         for (int i = 0, j = chars.length - 1; i < j; ++i, --j) {
             // we move the left pointer so that it points to the letter
-            // and both pointers havent crossed their paths
+            // and both pointers haven't crossed their paths
             while (!Character.isLetter(chars[i]) && i < j) {
                 i++;
             }
             // we move the right pointer so that it points to the letter
-            // and both pointers havent crossed their paths
+            // and both pointers haven't crossed their paths
             while (!Character.isLetter(chars[j]) && i < j) {
                 j--;
             }
