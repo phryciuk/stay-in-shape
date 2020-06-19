@@ -41,6 +41,7 @@ import java.util.Stack;
  * Output: true
  */
 public class ValidParentheses {
+
     public boolean isValid(String s) {
         Stack<Character> stack = new Stack<>();
         char[] charArray = s.toCharArray();

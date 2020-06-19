@@ -23,6 +23,7 @@ public class ReverseWordsInString3 {
                 while (j < chars.length && chars[j] != ' ') {
                     j++;
                 }
+                // reverse letters of the word
                 reverse(chars, i, j - 1);
                 i = j;
             }
