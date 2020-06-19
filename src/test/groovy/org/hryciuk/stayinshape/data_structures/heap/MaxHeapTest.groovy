@@ -13,7 +13,7 @@ class MaxHeapTest extends Specification {
         maxHeap.insertToMaxHeap(50)
 
         then:
-        maxHeap.getHeap() == [50, 40, 35, 30, 15, 12, 6, 5, 20, 10]
+        maxHeap.getHeap() == [50, 40, 15, 30, 35, 12, 6, 5, 20, 10]
     }
 
     def "should delete a root node from max heap"() {

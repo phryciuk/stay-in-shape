@@ -24,11 +24,12 @@ public class MaxHeap {
     void insertToMaxHeap(int value) {
         ensureCapacity();
         int index = size;
-        int temp = value;
         heap[index] = value;
-        while (index > 0 && heap[index / 2] < temp) {
-            heap[index] = heap[index / 2];
-            index = index / 2;
+        int parentIndex = (index - 1) / 2;
+        while (index > 0 && value > heap[parentIndex]) {
+            heap[index] = heap[parentIndex];
+            index = parentIndex;
+            parentIndex = (index - 1) / 2;
         }
         heap[index] = value;
         size++;
@@ -44,10 +45,7 @@ public class MaxHeap {
 
     public void removeFromHeap() {
         ensureCapacity();
-        int rootValue = heap[0];
-        int lastElement = heap[size - 1];
-        heap[size - 1] = rootValue;
-        heap[0] = lastElement;
+        swap(0, size - 1, heap);
         maxHeapify(this.heap, 0);
         size--;
     }
