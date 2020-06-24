@@ -12,7 +12,7 @@ class BinaryTreeInOrderTraversalTest extends Specification {
 
         when:
         BinaryTreeInOrderTraversal inOrderTraversal = new BinaryTreeInOrderTraversal()
-        List<Integer> actual = inOrderTraversal.inorderTraversalIterative(treeNode)
+        List<Integer> actual = inOrderTraversal.inorderTraversal(treeNode)
 
         then:
         actual == expectedResult
@@ -20,6 +20,7 @@ class BinaryTreeInOrderTraversalTest extends Specification {
         where:
         tree                                       | expectedResult
         [1, null, 2, 3]                            | [1, 3, 2]
+        [11]                                       | [11]
         [3, 9, 20, null, null, 15, 7]              | [9, 3, 15, 20, 7]
         [1, 2, 3, 6, 7, 4, 5, null, null, 8, null] | [6, 2, 8, 7, 1, 4, 3, 5]
     }
