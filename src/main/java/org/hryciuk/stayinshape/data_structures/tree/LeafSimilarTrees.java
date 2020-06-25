@@ -33,13 +33,8 @@ public class LeafSimilarTrees {
         if (leftChildren.size() != rightChildren.size()) {
             return false;
         } else {
-            for (int i = 0; i < leftChildren.size(); ++i) {
-                if (!leftChildren.get(i).equals(rightChildren.get(i))) {
-                    return false;
-                }
-            }
+            return leftChildren.equals(rightChildren);
         }
-        return true;
     }
 
     private List<Integer> dfs(TreeNode root) {
