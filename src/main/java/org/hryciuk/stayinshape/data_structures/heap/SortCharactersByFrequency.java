@@ -60,12 +60,13 @@ public class SortCharactersByFrequency {
 
         StringBuilder sb = new StringBuilder();
         while (!priorityQueue.isEmpty()) {
-            Map.Entry<Character, Integer> poll = priorityQueue.poll();
-            Integer termination = poll.getValue();
+            Map.Entry<Character, Integer> polled = priorityQueue.poll();
+            Integer termination = polled.getValue();
             for (int i = 0; i < termination; i++) {
-                sb.append(poll.getKey());
+                sb.append(polled.getKey());
             }
         }
         return sb.toString();
+
     }
 }
