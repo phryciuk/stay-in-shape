@@ -10,7 +10,7 @@ class SymmetricTreeTest extends Specification {
         SymmetricTree symmetricTree = new SymmetricTree()
 
         when:
-        boolean actual = symmetricTree.isSymmetric(root)
+        boolean actual = symmetricTree.isSymmetricIteratively(root)
 
         then:
         actual == expected
@@ -19,5 +19,8 @@ class SymmetricTreeTest extends Specification {
         tree                        | expected
         [1, 2, 2, 3, 4, 4, 3]       | true
         [1, 2, 2, null, 3, null, 3] | false
+        []                          | true
+        [1]                         | true
+        [1, 2]                      | false
     }
 }
