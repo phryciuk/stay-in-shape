@@ -21,10 +21,7 @@ public class GroupAnagrams {
                 mapOfStrings.put(asString, newList);
             }
         }
-        for (Map.Entry<String, List<String>> entry : mapOfStrings.entrySet()) {
-            results.add(entry.getValue());
-        }
-        return results;
+        return new ArrayList<>(mapOfStrings.values());
     }
 
     int[] getArrayOfOccurrences(String str) {

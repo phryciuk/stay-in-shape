@@ -12,7 +12,7 @@ class GroupAnagramsTest extends Specification {
         def actual = groupAnagrams.groupAnagrams(input)
 
         then:
-        actual == expected
+        actual.containsAll(expected)
 
         where:
         input                                      | expected
