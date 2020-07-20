@@ -3,6 +3,7 @@ package org.hryciuk.stayinshape.strings;
 public class PalindromicSubstrings {
 
     // TO JEST CHYBA MOJA NAJLEPSZA IMPLEMENTACJA PALINDROMOW
+    // https://www.youtube.com/watch?v=EIf9zFqufbU wazne zeby isc kolumnami w dol
     // palindrome is a palindrome if:
     // - it is a single letter
     // - it is a 2 letter word and last and first characters are the same
