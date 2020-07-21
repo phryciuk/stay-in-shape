@@ -44,4 +44,26 @@ public class SumOfLeftLeaves {
         }
         return sum;
     }
+
+    public int sumOfLeftLeavesDFS(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+        int[] sum = new int[1];
+        dfs(root, sum);
+        return sum[0];
+    }
+
+    private void dfs(TreeNode treeNode, int[] sum) {
+        if (treeNode == null) {
+            return;
+        }
+        dfs(treeNode.left, sum);
+        dfs(treeNode.right, sum);
+        if (treeNode.left != null) {
+            if (treeNode.left.left == null && treeNode.left.right == null) {
+                sum[0] += treeNode.left.val;
+            }
+        }
+    }
 }
