@@ -5,6 +5,17 @@ import java.util.Map;
 
 public class NRepeatedElementInSize2NArray {
 
+
+    public int repeatedNTimesImproved(int[] A) {
+        int[] occurrences = new int[10000];
+        for (int i = 0; i < A.length; ++i) {
+            if (occurrences[A[i]]++ == 1) {
+                return A[i];
+            }
+        }
+        return -1;
+    }
+
     public int repeatedNTimes(int[] A) {
         Map<Integer, Integer> map = new HashMap<>();
 
