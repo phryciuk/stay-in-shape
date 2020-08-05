@@ -1,6 +1,7 @@
 package org.hryciuk.stayinshape.data_structures.tree;
 
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 
 class TreeUtil {
@@ -27,6 +28,27 @@ class TreeUtil {
       }
     }
     return root;
+  }
+
+  static TreeNode findSubtree(TreeNode root, int p) {
+    if (root == null){
+      return null;
+    }
+    List<TreeNode> found = new LinkedList<>();
+    dfs(root, p, found);
+    return found.get(0);
+  }
+
+  static void dfs(TreeNode root, int p, List<TreeNode> found) {
+    if (root == null) {
+      return;
+    }
+    dfs(root.left, p, found);
+    if (p == root.val) {
+      found.add(root);
+      return;
+    }
+    dfs(root.right, p, found);
   }
 
 
