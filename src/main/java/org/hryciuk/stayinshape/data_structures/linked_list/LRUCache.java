@@ -38,7 +38,9 @@ public class LRUCache {
             add(node);
         } else {
             if (map.size() == this.size) {
-                map.remove(tail.prev.key);
+                map.remove(tail.prev.key); // IMPORTANT. First you need to remove the element from the map
+                                           // and then from the list.
+                                           // Otherwise you are removing wrong element from the map
                 remove(tail.prev);
             }
             Node newOne = new Node();
