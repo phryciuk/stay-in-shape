@@ -9,7 +9,7 @@ class TwoSumIIInputArrayIsSortedTest extends Specification {
         TwoSumIIInputArrayIsSorted twoSumIIInputArrayIsSorted = new TwoSumIIInputArrayIsSorted()
 
         when:
-        def actual = twoSumIIInputArrayIsSorted.twoSum(input, target)
+        def actual = twoSumIIInputArrayIsSorted.twoSumSimpler(input, target)
 
         then:
         actual[0] == expected[0]

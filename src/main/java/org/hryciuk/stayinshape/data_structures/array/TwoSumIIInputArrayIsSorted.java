@@ -1,6 +1,22 @@
 package org.hryciuk.stayinshape.data_structures.array;
 
 public class TwoSumIIInputArrayIsSorted {
+
+    public int[] twoSumSimpler(int[] numbers, int target) {
+        int hi = numbers.length - 1;
+        int lo = 0;
+        int sum = numbers[lo] + numbers[hi];
+        while (sum != target) {
+            if (sum > target) {
+                hi--;
+            } else {
+                lo++;
+            }
+            sum = numbers[lo] + numbers[hi];
+        }
+        return new int[] {lo + 1, hi + 1};
+    }
+
     public int[] twoSum(int[] numbers, int target) {
         for (int i = 0; i < numbers.length; ++i) {
             int val = numbers[i];
