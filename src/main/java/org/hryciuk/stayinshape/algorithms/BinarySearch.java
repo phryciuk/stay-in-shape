@@ -15,7 +15,7 @@ public class BinarySearch {
         // Loop continues until lo == hi
         while (lo < hi) {
             int middle = lo + (hi - lo + 1)  / 2; // right, upper mid
-//            int middle = lo + (hi - lo)  / 2; // left, lower mid; BAD; infinite loop for 2 element range where target >= middle
+//            int middle = lo + (hi - lo)  / 2; // left, lower mid; WRONG; infinite loop for 2 element range where target >= middle
             if (target < array[middle]) {
                 hi = middle - 1;
             } else {

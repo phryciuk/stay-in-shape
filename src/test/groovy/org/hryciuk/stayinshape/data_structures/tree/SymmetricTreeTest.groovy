@@ -1,16 +1,18 @@
 package org.hryciuk.stayinshape.data_structures.tree
 
 import spock.lang.Specification
+import spock.lang.Unroll
 
 class SymmetricTreeTest extends Specification {
 
+    @Unroll
     def "should determine whether a tree is symmetric or not"(Integer[] tree, boolean expected) {
         given:
         TreeNode root = TreeUtil.createFromArray(tree)
         SymmetricTree symmetricTree = new SymmetricTree()
 
         when:
-        boolean actual = symmetricTree.isSymmetricIteratively(root)
+        boolean actual = symmetricTree.isSymmetricA(root)
 
         then:
         actual == expected

@@ -1,8 +1,8 @@
 package org.hryciuk.stayinshape.data_structures.tree;
 
 public class DiameterOfBinaryTree {
-    int diameter = 0;
 
+    int diameter = 0;
 
     public int diameterOfBinaryTree(TreeNode root) {
         if (root == null) {
