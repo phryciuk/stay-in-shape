@@ -67,6 +67,5 @@ public class SortCharactersByFrequency {
             }
         }
         return sb.toString();
-
     }
 }
