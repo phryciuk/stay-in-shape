@@ -1,8 +1,5 @@
 package org.hryciuk.stayinshape.data_structures.tree;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class SubtreeOfAnotherTree {
     public boolean isSubtree(TreeNode s, TreeNode t) {
         return inorderDfs(s, t);

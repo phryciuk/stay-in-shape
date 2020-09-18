@@ -10,7 +10,7 @@ class FindFirstAndLastPositionOfElementInSortedArrayTest extends Specification {
         FindFirstAndLastPositionOfElementInSortedArray findFirstAndLastPositionOfElementInSortedArray = new FindFirstAndLastPositionOfElementInSortedArray()
 
         when:
-        int[] actual = findFirstAndLastPositionOfElementInSortedArray.searchRangeNew(input, target)
+        int[] actual = findFirstAndLastPositionOfElementInSortedArray.searchRange(input, target)
 
         then:
         Arrays.equals(actual, expected)
