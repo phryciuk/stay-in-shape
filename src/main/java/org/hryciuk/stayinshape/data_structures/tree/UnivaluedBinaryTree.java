@@ -28,6 +28,27 @@ package org.hryciuk.stayinshape.data_structures.tree;
  *     Each node's value will be an integer in the range [0, 99].
  */
 public class UnivaluedBinaryTree {
+
+    public boolean isUnivalTree2(TreeNode root) {
+        if (root == null) {
+            return false;
+        }
+        int expectedVal = root.val;
+        return dfs(root, expectedVal);
+    }
+
+    private boolean dfs(TreeNode root, int expectedVal) {
+        if (root == null) {
+            return true;
+        }
+        boolean left = dfs(root.left, expectedVal);
+        if (root.val != expectedVal) {
+            return false;
+        }
+        boolean right = dfs(root.right, expectedVal);
+        return left && right;
+    }
+
     public boolean isUnivalTree(TreeNode root) {
         if (root == null) {
             return false;

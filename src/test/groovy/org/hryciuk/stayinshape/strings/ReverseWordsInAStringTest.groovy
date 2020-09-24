@@ -21,5 +21,6 @@ class ReverseWordsInAStringTest extends Specification {
         "piotr"                  | "piotr"
         "piotr hryciuk"          | "hryciuk piotr"
         "janusz kowalski 123654" | "123654 kowalski janusz"
+        "  hello world!  "       | "world! hello"
     }
 }

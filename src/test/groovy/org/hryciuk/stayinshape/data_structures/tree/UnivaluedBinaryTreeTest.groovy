@@ -9,7 +9,7 @@ class UnivaluedBinaryTreeTest extends Specification {
 
         when:
         UnivaluedBinaryTree univaluedBinaryTree = new UnivaluedBinaryTree()
-        boolean actual = univaluedBinaryTree.isUnivalTree(tree)
+        boolean actual = univaluedBinaryTree.isUnivalTree2(tree)
 
         then:
         actual == expectedResult
