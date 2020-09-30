@@ -15,8 +15,11 @@ class CountUnivalueSubtreesTest extends Specification {
         expected == actual
 
         where:
-        tree                     | expected
-        [5, 1, 5, 5, 5, null, 5] | 4
-        [1, 3, 2, 4, 5, null, 6] | 3
+        tree                                             | expected
+        [5, 1, 5, 5, 5, null, 5]                         | 4
+        [1, 3, 2, 4, 5, null, 6]                         | 3
+        [1, 2, 3, 4, null, 5, 6, 4, null, 5, 5, null, 7] | 6
+
+
     }
 }

@@ -1,9 +1,6 @@
 package org.hryciuk.stayinshape.data_structures.tree;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
+import java.util.*;
 
 /**
  * 107. Binary Tree Level Order Traversal II
@@ -65,4 +62,36 @@ public class BinaryTreeLevelOrderTraversalII {
             list.set(list.size() - 1 - i, tmp);
         }
     }
+    public List<List<Integer>> levelOrderBottomWithStack(TreeNode root) {
+        List<List<Integer>> result = new LinkedList<>();
+        if (root == null) {
+            return result;
+        }
+        Deque<TreeNode> q = new LinkedList<>();
+        q.push(root);
+
+        Deque<List<Integer>> stack = new LinkedList<>();
+        while(!q.isEmpty()) {
+            int size = q.size();
+            List<Integer> level = new LinkedList<>();
+            for (int i = 0; i < size; ++i) {
+                TreeNode polled = q.poll();
+                if (polled.left != null) {
+                    q.offer(polled.left);
+                }
+                if (polled.right != null) {
+                    q.offer(polled.right);
+                }
+                level.add(polled.val);
+            }
+            stack.push(level);
+        }
+
+        while(!stack.isEmpty()) {
+            result.add(stack.pop());
+        }
+        return result;
+    }
+
+
 }

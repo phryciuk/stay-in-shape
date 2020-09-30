@@ -24,26 +24,22 @@ package org.hryciuk.stayinshape.data_structures.tree;
  */
 public class DiameterOfBinaryTree {
 
-    int diameter = 0;
-
     public int diameterOfBinaryTree(TreeNode root) {
-        if (root == null) {
-            return diameter;
-        }
-        diameter(root);
-        return diameter;
-    }
-
-    int diameter(TreeNode root) {
         if (root == null) {
             return 0;
         }
-        int left = diameter(root.left);
-        int right = diameter(root.right);
-        // longest diameter of any subtree
-        diameter = Math.max(diameter, left + right);
-        // we return longer subtree
-        int longestDiameter = Math.max(left, right);
-        return longestDiameter + 1;
+        int[] diameter = new int[1];
+        depth(root, diameter);
+        return diameter[0];
+    }
+
+    public int depth(TreeNode root, int[] diameter) {
+        if (root == null) {
+            return 0;
+        }
+        int left = depth(root.left, diameter);
+        int right = depth (root.right, diameter);
+        diameter[0] = Math.max(diameter[0], left + right);
+        return Math.max(left, right) + 1;
     }
 }
