@@ -17,6 +17,18 @@ class ReverseLinkedList {
     return previous;
   }
 
+  public ListNode reverseList(ListNode head) {
+    ListNode prev = null;
+    ListNode current = head;
+    while (current != null) {
+      ListNode next = current.next;
+      current.next = prev;
+      prev = current;
+      current = next;
+    }
+    return prev;
+  }
+
   /*
    1) Divide the list in two parts - first node and rest of the linked list.
    2) Call reverse for the rest of the linked list.

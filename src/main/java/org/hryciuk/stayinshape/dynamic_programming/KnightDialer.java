@@ -1,8 +1,11 @@
 package org.hryciuk.stayinshape.dynamic_programming;
 
 import java.util.*;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 public class KnightDialer {
+
+    private ReentrantReadWriteLock lock;
     private final static int MOD = 1000000000 + 7;
 
     public int knightDialer(int n) {

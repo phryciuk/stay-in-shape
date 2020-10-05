@@ -31,7 +31,21 @@ package org.hryciuk.stayinshape.data_structures.linked_list;
  *     The number of nodes in the given list will be between 1 and 100.
  */
 public class MiddleOfLinkedList {
+
     public ListNode middleNode(ListNode head) {
+        if (head.next == null) {
+            return head;
+        }
+        ListNode fast = head;
+        ListNode slow = head;
+        while (slow != null && fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        return slow;
+    }
+
+    public ListNode middleNodeWorse(ListNode head) {
         int sizeOfLinkedList = 1;
         ListNode tmp = head;
         while (tmp.next != null) {
