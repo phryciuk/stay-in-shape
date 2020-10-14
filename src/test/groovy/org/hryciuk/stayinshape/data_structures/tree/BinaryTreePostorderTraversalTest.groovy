@@ -20,5 +20,7 @@ class BinaryTreePostorderTraversalTest extends Specification {
         tree                                                               | expectedResult
         [1, 3, 2, 4, 5, null, 8, null, null, null, 6, null, null, null, 7] | [4, 7, 6, 5, 3, 8, 2, 1]
         [1, null, 2, 3]                                                    | [3, 2, 1]
+        []                                                                 | []
+        [1]                                                                | [1]
     }
 }
