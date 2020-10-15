@@ -49,7 +49,6 @@ public class ZeroOneKnapsackProblem {
     }
 
     private int knapsackIterative(int[][] dp, int[] weight, int[] profit, int capacity) {
-
         // we initialize the first column; could be omitted
         for (int i = 0; i < dp.length; ++i) {
             dp[i][0] = 0;
