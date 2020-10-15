@@ -42,23 +42,28 @@ public class SherlockAndTheValidString {
             occurrences.put(c, occurrences.getOrDefault(c, 0) + 1);
         }
 
-        Map<Integer, Integer> valueToFrequency = new HashMap<>();
+        Map<Integer, Integer> numberOfLettersToFrequency = new HashMap<>();
         for (Map.Entry<Character, Integer> entry : occurrences.entrySet()) {
-            valueToFrequency.put(entry.getValue(), valueToFrequency.getOrDefault(entry.getValue(), 0) + 1);
+            numberOfLettersToFrequency.put(entry.getValue(), numberOfLettersToFrequency.getOrDefault(entry.getValue(), 0) + 1);
         }
-        if (valueToFrequency.size() == 1) {
+        // all values have same frequency
+        if (numberOfLettersToFrequency.size() == 1) {
             return true;
         }
-        if (valueToFrequency.size() > 2) {
+        // more than 2 frequencies
+        if (numberOfLettersToFrequency.size() > 2) {
             return false;
         }
         // exactly two values;
-        if (valueToFrequency.containsKey(1) && valueToFrequency.get(1) == 1) {
+        // one occurrence of single character
+        if (numberOfLettersToFrequency.containsKey(1) && numberOfLettersToFrequency.get(1) == 1) {
             return true;
         } else {
-            Integer minKey = Collections.min(valueToFrequency.keySet());
-            Integer maxKey = Collections.max(valueToFrequency.keySet());
-            if (maxKey - minKey == 1 && valueToFrequency.get(maxKey) == 1) {
+            // difference between the number of letters is 1
+            // and part with more characters occurs only 1
+            Integer minKey = Collections.min(numberOfLettersToFrequency.keySet());
+            Integer maxKey = Collections.max(numberOfLettersToFrequency.keySet());
+            if (maxKey - minKey == 1 && numberOfLettersToFrequency.get(maxKey) == 1) {
                 return true;
             }
         }
