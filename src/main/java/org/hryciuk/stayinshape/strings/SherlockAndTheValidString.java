@@ -36,7 +36,6 @@ public class SherlockAndTheValidString {
         }
         char[] arr = s.toCharArray();
         Map<Character, Integer> occurrences = new HashMap<>();
-
         for (int i = 0; i < arr.length; ++i) {
             char c = arr[i];
             occurrences.put(c, occurrences.getOrDefault(c, 0) + 1);
@@ -60,7 +59,7 @@ public class SherlockAndTheValidString {
             return true;
         } else {
             // difference between the number of letters is 1
-            // and part with more characters occurs only 1
+            // and part with more characters occurs only 1, e.g. aaaabbbccc
             Integer minKey = Collections.min(numberOfLettersToFrequency.keySet());
             Integer maxKey = Collections.max(numberOfLettersToFrequency.keySet());
             if (maxKey - minKey == 1 && numberOfLettersToFrequency.get(maxKey) == 1) {
@@ -68,6 +67,6 @@ public class SherlockAndTheValidString {
             }
         }
         return false;
-
     }
+
 }
