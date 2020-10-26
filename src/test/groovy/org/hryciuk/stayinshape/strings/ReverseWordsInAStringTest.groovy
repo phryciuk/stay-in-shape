@@ -8,7 +8,7 @@ class ReverseWordsInAStringTest extends Specification {
         ReverseWordsInAString reverseWordsInAString = new ReverseWordsInAString()
 
         when:
-        String actual = reverseWordsInAString.reverseWords(input)
+        String actual = reverseWordsInAString.reverseWordsConstantSpace(input)
 
         then:
         actual == expected
@@ -22,5 +22,6 @@ class ReverseWordsInAStringTest extends Specification {
         "piotr hryciuk"          | "hryciuk piotr"
         "janusz kowalski 123654" | "123654 kowalski janusz"
         "  hello world!  "       | "world! hello"
+        "a good   example"       | "example good a"
     }
 }
