@@ -30,42 +30,27 @@ package org.hryciuk.stayinshape.data_structures.array;
  */
 public class BestTimeToBuyAndSellStock2 {
 
-    public int maxProfit(int[] prices) {
-        if (prices.length < 2) {
+    public int maxProfit(int[] arr) {
+        if (arr == null || arr.length == 0) {
             return 0;
         }
 
-        if (prices.length == 2) {
-            if (prices[0] >= prices[1]) {
-                return 0;
-            } else {
-                return prices[1] - prices[0];
+        int maxProfit = 0;
+        int minIndex = 0;
+        int maxIndex = 0;
+
+        for (int i = 0; i < arr.length; ++i) {
+            if (arr[i] < arr[maxIndex]) {
+                maxProfit += arr[maxIndex] - arr[minIndex];
+                minIndex = i;
+                maxIndex = i;
+            }
+            if (arr[i] > arr[maxIndex]) {
+                maxIndex = i;
             }
         }
-
-        int minPrice = prices[0];
-        int minPriceIndex = 0;
-        int maxPrice = prices[0];
-        int result = 0;
-
-        int totalResult = 0;
-
-        for (int i = 0; i < prices.length; ++i) {
-            if (prices[i] < maxPrice) {
-                result = maxPrice - minPrice;
-                totalResult = totalResult + result;
-                result = 0;
-                minPrice = prices[i];
-                maxPrice = prices[i];
-                minPriceIndex = i;
-            }
-            if (prices[i] > maxPrice && i > minPriceIndex) {
-                maxPrice = prices[i];
-                result = maxPrice - minPrice;
-            }
-        }
-        totalResult = totalResult + result;
-        return totalResult;
+        maxProfit += arr[maxIndex] - arr[minIndex];
+        return maxProfit;
     }
 
 }

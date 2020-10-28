@@ -1,6 +1,7 @@
 package org.hryciuk.stayinshape.backtracking;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -23,24 +24,32 @@ import java.util.List;
  * ]
  */
 public class Permutations {
+
+
     public List<List<Integer>> permute(int[] nums) {
-        if (nums == null || nums.length == 0) {
-            return new ArrayList<>();
-        }
         List<List<Integer>> result = new ArrayList<>();
-        generatePermutations(nums, new ArrayList<>(), result);
+        if (nums == null || nums.length == 0) {
+            return result;
+        }
+        List<Integer> current = new LinkedList<>();
+        permuteHelper(current, nums, result);
         return result;
     }
 
-    private void generatePermutations(int[] nums, ArrayList<Integer> temp, List<List<Integer>> result) {
-        if (temp.size() == nums.length) {
-            result.add(new ArrayList<>(temp));
-        }
-        for (int i = 0; i < nums.length; ++i) {
-            if (temp.contains(nums[i])) continue;
-            temp.add(nums[i]);
-            generatePermutations(nums, temp, result);
-            temp.remove(temp.size() - 1);
+    private void permuteHelper(List<Integer> current, int[] nums, List<List<Integer>> result) {
+        if (current.size() == nums.length) {
+            result.add(new LinkedList<>(current));
+            return;
+        } else {
+            for (int i = 0; i < nums.length; ++i) {
+                if (current.contains(nums[i])) {
+                    continue;
+                } else {
+                    current.add(nums[i]);
+                    permuteHelper(current, nums, result);
+                    current.remove(current.size() - 1);
+                }
+            }
         }
     }
 }

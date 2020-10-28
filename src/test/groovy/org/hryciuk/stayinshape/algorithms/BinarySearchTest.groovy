@@ -1,5 +1,6 @@
 package org.hryciuk.stayinshape.algorithms
 
+import org.hryciuk.stayinshape.algorithms.binary_search.BinarySearch
 import spock.lang.Specification
 
 class BinarySearchTest extends Specification {

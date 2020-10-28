@@ -1,9 +1,11 @@
 package org.hryciuk.stayinshape.data_structures.array
 
 import spock.lang.Specification
+import spock.lang.Unroll
 
 class BestTimeToBuyAndSellStock2Test extends Specification {
 
+    @Unroll
     def "should return max profit during some period"(int[] input, int expectedResult) {
 
         given:

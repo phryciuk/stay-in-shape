@@ -1,4 +1,4 @@
-package org.hryciuk.stayinshape.algorithms;
+package org.hryciuk.stayinshape.algorithms.binary_search;
 
 /**
  * https://leetcode.com/problems/binary-search/discuss/423162/Binary-Search-101
