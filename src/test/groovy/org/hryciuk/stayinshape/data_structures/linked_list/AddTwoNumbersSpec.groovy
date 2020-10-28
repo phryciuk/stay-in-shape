@@ -14,7 +14,7 @@ class AddTwoNumbersSpec extends Specification {
         AddTwoNumbers addTwoNumbers = new AddTwoNumbers()
 
         when:
-        def result = addTwoNumbers.addTwoNumbers2(firstList, secondList)
+        def result = addTwoNumbers.addTwoNumbers(firstList, secondList)
 
         then:
         LinkedListUtil.buildStringFromListNode(result) == expected
