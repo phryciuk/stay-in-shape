@@ -1,8 +1,10 @@
 package org.hryciuk.stayinshape.data_structures.array
 
 import spock.lang.Specification
+import spock.lang.Unroll
 
 class MinimumSizeSubarraySumTest extends Specification {
+    @Unroll
     def "should return minimum size subarray sum"(int[] input, int s, int expected) {
         given:
         MinimumSizeSubarraySum minimumSizeSubarraySum = new MinimumSizeSubarraySum()

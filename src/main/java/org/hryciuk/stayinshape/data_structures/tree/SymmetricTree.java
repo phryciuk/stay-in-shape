@@ -88,38 +88,41 @@ public class SymmetricTree {
         return first && second;
     }
 
-    public boolean isSymmetricA(TreeNode root) {
+    public boolean isSymmetric2(TreeNode root) {
         if (root == null) {
             return true;
-        }
-        if (root.left == null && root.right == null) {
+        } else if (root.left == null && root.right == null) {
             return true;
-        }
-        if (root.left == null || root.right == null) {
+        } else if (root.left == null || root.right == null) {
             return false;
         }
         Deque<TreeNode> stack = new LinkedList<>();
-        TreeNode leftSubtree = root.left;
-        TreeNode rightSubtree = root.right;
-        while ((leftSubtree != null && rightSubtree != null) || !stack.isEmpty()) {
-            if (leftSubtree != null && rightSubtree != null) {
-                stack.push(leftSubtree);
-                stack.push(rightSubtree);
-                leftSubtree = leftSubtree.left;
-                rightSubtree = rightSubtree.right;
-            } else if (leftSubtree == null && rightSubtree == null) {
-                TreeNode firstOne = stack.pop();
-                TreeNode secondOne = stack.pop();
-                if (firstOne.val != secondOne.val) {
+        TreeNode left = root.left;
+        TreeNode right = root.right;
+        while ((left != null && right != null) || !stack.isEmpty()) {
+            if (left != null && right != null) {
+                stack.push(left);
+                left = left.left;
+                stack.push(right);
+                right = right.right;
+            } else if (left == null && right == null) {
+                TreeNode first = stack.pop();
+                if (!stack.isEmpty()) {
+                    TreeNode second = stack.pop();
+                    if (first.val != second.val) {
+                        return false;
+                    } else {
+                        right = first.left;
+                        left = second.right;
+                    }
+                } else {
                     return false;
                 }
-                leftSubtree = firstOne.right;
-                rightSubtree = secondOne.left;
             } else {
                 return false;
             }
         }
-        return true;
+        return left == right;
     }
 
 

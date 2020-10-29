@@ -20,21 +20,20 @@ public class MinimumSizeSubarraySum {
     // Using sliding window technique
     // Time: O(n + n), Space: O(1)
     public int minSubArrayLen(int s, int[] nums) {
-        int currentSum = 0;
-        int minimalLength = Integer.MAX_VALUE;
-        int startOfWindow = 0;
-        int endOfWindow = 0;
+        int sum = 0;
+        int minimumLength = Integer.MAX_VALUE;
+        int start = 0;
         for (int i = 0; i < nums.length; ++i) { // O(n)
-            currentSum += nums[i];
-            if (currentSum >= s) {
-                endOfWindow = i;
-                while (currentSum >= s) { // this inner loop processes each element only once; O(n)
-                    currentSum -= nums[startOfWindow];
-                    startOfWindow++;
+            sum += nums[i];
+            if (sum >= s) {
+                while (sum >= s) { // this inner loop processes each element only once; O(n)
+                    sum -= nums[start];
+                    start++;
                 }
-                minimalLength = Math.min(minimalLength, endOfWindow - startOfWindow + 2);
+                minimumLength = Math.min(minimumLength, i - start + 2);
             }
         }
-        return minimalLength == Integer.MAX_VALUE ? 0 : minimalLength;
+        return minimumLength == Integer.MAX_VALUE ? 0 : minimumLength;
     }
+
 }
