@@ -19,11 +19,11 @@ class SymmetricTreeTest extends Specification {
 
         where:
         tree                        | expected
-//        [1, 2, 2, 3, 4, 4, 3]       | true
-//        [1, 2, 2, null, 3, null, 3] | false
-//        []                          | true
-//        [1]                         | true
-//        [1, 2]                      | false
+        [1, 2, 2, 3, 4, 4, 3]       | true
+        [1, 2, 2, null, 3, null, 3] | false
+        []                          | true
+        [1]                         | true
+        [1, 2]                      | false
         [2, 3, 3, 4, 5, null, 4]    | false
     }
 }

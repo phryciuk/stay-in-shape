@@ -1,5 +1,7 @@
 package org.hryciuk.stayinshape.data_structures.stack;
 
+import java.util.Deque;
+import java.util.LinkedList;
 import java.util.Stack;
 
 /**
