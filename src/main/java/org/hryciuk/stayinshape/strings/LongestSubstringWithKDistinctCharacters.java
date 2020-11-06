@@ -28,27 +28,28 @@ import java.util.Map;
  */
 public class LongestSubstringWithKDistinctCharacters {
 
-    public int findLength(String str, int k) {
-        Map<Character, Integer> charFrequencyMap = new HashMap<>();
-        int longestSubstringLength = Integer.MIN_VALUE;
-        char[] stringAsChars = str.toCharArray();
-        int startOfWindow = 0;
-        int endOfWindow = 0;
-        for (int i = 0; i < stringAsChars.length; ++i) {
-            char currentCharacter = stringAsChars[i];
-            charFrequencyMap.put(currentCharacter, charFrequencyMap.getOrDefault(currentCharacter, 0) + 1);
-            while (charFrequencyMap.size() > k) {
-                char startOfWindowChar = stringAsChars[startOfWindow];
-                charFrequencyMap.put(startOfWindowChar, charFrequencyMap.get(startOfWindowChar) - 1);
-                if (charFrequencyMap.get(startOfWindowChar) == 0) {
-                    charFrequencyMap.remove(startOfWindowChar);
-                }
-                startOfWindow++;
-            }
-            endOfWindow++;
-            longestSubstringLength = Math.max(longestSubstringLength, endOfWindow - startOfWindow);
+    public int findLength(String s, int k) {
+        if (s == null || s.length() == 0) {
+            return 0;
         }
-        return longestSubstringLength;
+        int start = 0;
+        Map<Character, Integer> occurrences = new HashMap<>();
+        int longestSubstring = 0;
+        char[] arr = s.toCharArray();
+        for (int i = 0; i < arr.length; ++i) {
+            char current = arr[i];
+            occurrences.put(current, occurrences.getOrDefault(current, 0) + 1);
+            while (occurrences.size() > k) {
+                char atStart = arr[start];
+                occurrences.put(atStart, occurrences.get(atStart) - 1);
+                if (occurrences.get(atStart) == 0) {
+                    occurrences.remove(atStart);
+                }
+                start++;
+            }
+            longestSubstring = Math.max(longestSubstring, i - start + 1);
+        }
+        return longestSubstring;
     }
 
 }
