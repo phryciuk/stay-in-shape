@@ -3,39 +3,49 @@ package org.hryciuk.stayinshape.data_structures.graph;
 import java.util.*;
 
 public class CourseSchedule {
+    // Kahn's algorithm
+    // Great explanation: https://youtu.be/cIBFEhD77b4
+    // Time: O(V+E)
     public boolean canFinish(int numCourses, int[][] prerequisites) {
-        int[] incomingEdges = new int[numCourses];
-
-        List<Integer>[] outgoingCourses = new List[numCourses];
-        for (int i = 0; i < outgoingCourses.length; ++i) {
-            outgoingCourses[i] = new LinkedList<>();
+        if (prerequisites == null || prerequisites.length == 0) {
+            return true;
         }
 
-        for (int[] pair : prerequisites) {
-            incomingEdges[pair[0]]++;
-            outgoingCourses[pair[1]].add(pair[0]);
+        // initialize edges lists
+        List<Integer>[] edges = new List[numCourses];
+        for (int i = 0; i < edges.length; ++i) {
+            edges[i] = new LinkedList<>();
+        }
+
+        // build adjacency list and indegrees array
+        int[] indegrees = new int[numCourses];
+        for (int i = 0; i < prerequisites.length; ++i) {
+            int[] current = prerequisites[i];
+            indegrees[current[0]]++;
+            edges[current[1]].add(current[0]);
         }
 
         Queue<Integer> q = new LinkedList<>();
-
-        // we are adding nodes of indegree 0
-        for (int i = 0; i < incomingEdges.length; ++i) {
-            if (incomingEdges[i] == 0) {
+        // add nodes with indegrees of 0 to Queue
+        for (int i = 0; i < indegrees.length; ++i) {
+            if (indegrees[i] == 0) {
                 q.add(i);
             }
         }
-
-        int numberOfEdges = prerequisites.length;
+        int totalNumberOfEdges = prerequisites.length;
         while (!q.isEmpty()) {
-            int current = q.poll();
-            for (int outgoing : outgoingCourses[current]) {
-                numberOfEdges--;
-                incomingEdges[outgoing]--;
-                if (incomingEdges[outgoing] == 0) {
-                    q.add(outgoing);
+            int polled = q.poll();
+            // decrement indegrees of neighbouring nodes
+            for (int i = 0; i < edges[polled].size(); ++i) {
+                int destNode = edges[polled].get(i);
+                indegrees[destNode]--;
+                // add new 0 indegree nodes to Queue
+                if (indegrees[destNode] == 0) {
+                    q.add(destNode);
                 }
+                totalNumberOfEdges--;
             }
         }
-        return numberOfEdges == 0;
+        return totalNumberOfEdges == 0;
     }
 }
