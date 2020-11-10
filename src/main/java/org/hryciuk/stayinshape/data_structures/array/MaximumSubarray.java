@@ -1,6 +1,19 @@
 package org.hryciuk.stayinshape.data_structures.array;
 
 public class MaximumSubarray {
+
+    // Using Kadane's algorithm.
+    // main idea is maxSubArray is Max(thisElement, thisElement + maxUpToThisPoint)
+    public int maxSubArrayKadane(int[] nums) {
+        int max = nums[0];
+        int currentSum = nums[0];
+        for (int i = 1; i < nums.length; ++i) {
+            currentSum = Math.max(nums[i], currentSum + nums[i]);
+            max = Math.max(currentSum, max);
+        }
+        return max;
+    }
+
     public int maxSubArray(int[] nums) {
         int runningSum = 0;
         int maxSubArraySum = Integer.MIN_VALUE;
