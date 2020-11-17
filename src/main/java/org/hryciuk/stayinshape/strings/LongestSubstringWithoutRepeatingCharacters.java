@@ -34,4 +34,24 @@ public class LongestSubstringWithoutRepeatingCharacters {
         }
         return maxLengthOfSubstringWithoutRepeatingCharacters;
     }
+
+    public int lengthOfLongestSubstring2(String s) {
+        if (s == null || s.length() == 0) {
+            return 0;
+        }
+        char[] arr = s.toCharArray();
+        int start = 0;
+        int longest = 0;
+        Map<Character, Integer> charToIndex = new HashMap<>();
+        for (int i = 0; i < arr.length; ++i) {
+            char current = arr[i];
+            if (charToIndex.containsKey(current)) {
+                int index = charToIndex.get(current);
+                start = Math.max(start, index + 1);
+            }
+            charToIndex.put(current, i);
+            longest = Math.max(longest, i - start + 1);
+        }
+        return longest;
+    }
 }
