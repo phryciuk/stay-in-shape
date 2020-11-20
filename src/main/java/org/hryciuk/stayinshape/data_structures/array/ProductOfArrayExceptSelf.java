@@ -17,13 +17,12 @@ public class ProductOfArrayExceptSelf {
         int[] output = new int[n];
         output[0] = 1;
         for (int i = 1; i < n; ++i) {
-            output[i] = output[i - 1] * nums[i -1];
+            output[i] = output[i - 1] * nums[i - 1];
         }
 
         int initial = 1;
 
         for (int i = n - 1; i >= 0; i--) {
-            int tmp = output[i];
             output[i] *= initial;
             initial *= nums[i];
         }

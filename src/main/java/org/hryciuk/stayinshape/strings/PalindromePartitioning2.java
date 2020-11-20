@@ -1,5 +1,7 @@
 package org.hryciuk.stayinshape.strings;
 
+import java.util.Arrays;
+
 /**
  * 132. Palindrome Partitioning II
  * Hard
@@ -60,18 +62,63 @@ public class PalindromePartitioning2 {
             cuts[i] = Integer.MAX_VALUE;
         }
 
-        for (int i = 0; i < n; ++i) {
-            if (isPalindrome[0][i]) {
-                cuts[i] = 0;
+        for (int j = 0; j < n; ++j) {
+            if (isPalindrome[0][j]) {
+                cuts[j] = 0;
             } else {
-                for (int j = 0; j <= i; ++j) {
-                    if (isPalindrome[j][i]) {
-                        cuts[i] = Math.min(cuts[j - 1] + 1, cuts[i]);
+                for (int i = 0; i <= j; ++i) {
+                    if (isPalindrome[i][j]) {
+                        cuts[j] = Math.min(cuts[i - 1] + 1, cuts[j]);
                     }
                 }
             }
         }
         return cuts[n - 1];
+    }
+
+    public int minCut2(String s) {
+        if (s == null || s.length() == 0) {
+            return 0;
+        }
+        boolean[][] isPalindrome = new boolean[s.length()][s.length()];
+
+        // strings of length 1
+        for (int i = 0; i < s.length(); ++i) {
+            isPalindrome[i][i] = true;
+        }
+
+        // 2 characters
+        for (int i = 1; i < s.length(); ++i) {
+            if (s.charAt(i - 1) == s.charAt(i)) {
+                isPalindrome[i - 1][i] = true;
+            }
+        }
+
+        // 3 characters and longer
+        for (int j = 2; j < s.length(); ++j) {
+            for (int i = 0; i < j - 1; ++i) {
+                if (s.charAt(i) == s.charAt(j) && isPalindrome[i + 1][j - 1]) {
+                    isPalindrome[i][j] = true;
+                }
+            }
+        }
+
+        int[] minCuts = new int[s.length()];
+        Arrays.fill(minCuts, Integer.MAX_VALUE);
+
+
+        for (int j = 0; j < s.length(); ++j) {
+            if (isPalindrome[0][j]) {
+                minCuts[j] = 0;
+            } else {
+                for (int i = 0; i <= j; ++i) {
+                    if (isPalindrome[i][j]) {
+                        minCuts[j] = Math.min(minCuts[i - 1] + 1, minCuts[j]);
+                    }
+                }
+            }
+        }
+        return minCuts[s.length() - 1];
     }
 
 

@@ -3,6 +3,8 @@ package org.hryciuk.stayinshape.data_structures.graph;
 import java.util.*;
 
 public class CloneGraph {
+
+    // time O(V + E) | space O(V)
     public Node cloneGraph(Node node) {
         Map<Integer, Node> clonedNodes = new HashMap<>();
         Deque<Node> q = new LinkedList<>();
@@ -30,4 +32,5 @@ public class CloneGraph {
         }
         return clone;
     }
+
 }
