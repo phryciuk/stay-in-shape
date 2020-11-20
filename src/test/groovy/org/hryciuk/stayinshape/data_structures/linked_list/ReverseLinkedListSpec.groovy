@@ -34,7 +34,7 @@ class ReverseLinkedListSpec extends Specification {
     ReverseLinkedList reverseLinkedList = new ReverseLinkedList()
 
     when:
-    def reversed = reverseLinkedList.reverseLinkedListRecursively(list)
+    def reversed = reverseLinkedList.reverseLinkedListRecursively2(list)
 
     then: "prints in reversed order"
     LinkedListUtil.printList(reversed)

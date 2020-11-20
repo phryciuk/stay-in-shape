@@ -33,11 +33,11 @@ public class BinarySearch {
         int hi = array.length - 1;
 
         while (lo < hi) {
-            int middle = lo + (hi - lo) / 2; // left, lower mid
-            if (target > array[middle]) {
-                lo = middle + 1;
+            int mid = lo + (hi - lo) / 2; // left, lower mid
+            if (array[mid] < target) {
+                lo = mid + 1;
             } else {
-                hi = middle;
+                hi = mid;
             }
         }
         return array[lo] == target ? lo : -1;
@@ -61,6 +61,19 @@ public class BinarySearch {
         } else {
             return binarySearchHelper(arr, target, mid + 1, hi);
         }
+    }
+
+    public int binarySearchOnSortedDescending(int[] arr, int target) {
+        int lo = 0; int hi = arr.length - 1;
+        while (lo < hi) {
+            int mid = lo + (hi - lo) / 2;
+            if (arr[mid] > target) {
+                lo = mid + 1;
+            } else {
+                hi = mid;
+            }
+        }
+        return arr[lo] == target ? lo : -1;
     }
 
 

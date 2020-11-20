@@ -9,7 +9,7 @@ class LongestIncreasingSubsequenceTest extends Specification {
         LongestIncreasingSubsequence longestIncreasingSubsequence = new LongestIncreasingSubsequence()
 
         when:
-        int actual = longestIncreasingSubsequence.lengthOfLIS(nums)
+        int actual = longestIncreasingSubsequence.lengthOfLIS2(nums)
 
         then:
         actual == expected
@@ -19,6 +19,7 @@ class LongestIncreasingSubsequenceTest extends Specification {
         [4, 10, 4, 3, 8, 9]                 || 3
         [0]                                 || 1
         [3, 2]                              || 1
+        [7, 5]                              || 1
         [10, 9, 2, 5, 3, 7, 101, 18]        || 4
         [10, 22, 9, 33, 21, 50, 41, 60, 80] || 6
         [50, 3, 10, 7, 40, 80]              || 4

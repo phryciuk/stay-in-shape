@@ -53,6 +53,7 @@ class ReverseLinkedList {
     return reversed;
   }
 
+  // https://www.youtube.com/watch?v=MRe3UsRadKw
   ListNode reverseLinkedListRecursively2(ListNode node) {
     if (node == null) {
       return null;
@@ -65,5 +66,4 @@ class ReverseLinkedList {
     node.next = null;
     return reversed;
   }
-
 }

@@ -28,5 +28,6 @@ class MaxPathSumTest extends Specification {
         [-100, null, 3, null, 5, null, 7] || 15
         [-3]                              || -3
         [-2, -1]                          || -1
+        [1, 2]                            || 3
     }
 }
