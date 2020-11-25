@@ -1,4 +1,4 @@
-package org.hryciuk.stayinshape.sorting
+package org.hryciuk.stayinshape.fundamentals.algorithms.sorting
 
 import spock.lang.Specification
 
@@ -8,7 +8,7 @@ class QuicksortHoareTest extends Specification {
         QuicksortHoare quickSort = new QuicksortHoare(input)
 
         when:
-        quickSort.quickSort(0, input.length - 1)
+        quickSort.quickSort(input , 0, input.length - 1)
 
         then:
         input == expected

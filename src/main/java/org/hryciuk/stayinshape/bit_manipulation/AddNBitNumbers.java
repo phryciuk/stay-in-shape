@@ -1,4 +1,4 @@
-package org.hryciuk.stayinshape.sorting.bit;
+package org.hryciuk.stayinshape.bit_manipulation;
 
 public class AddNBitNumbers {
 

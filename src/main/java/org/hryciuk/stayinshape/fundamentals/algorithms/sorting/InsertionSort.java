@@ -1,4 +1,4 @@
-package org.hryciuk.stayinshape.sorting;
+package org.hryciuk.stayinshape.fundamentals.algorithms.sorting;
 
 class InsertionSort {
     private int[] array;

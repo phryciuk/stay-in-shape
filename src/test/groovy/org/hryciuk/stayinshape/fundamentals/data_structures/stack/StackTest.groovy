@@ -16,9 +16,11 @@ class StackTest extends Specification {
         stack.push(5);
 
         then:
+        !stack.isEmpty()
         stack.pop() == 5
         stack.pop() == 4
         stack.pop() == 3
+        !stack.isEmpty()
 
         when:
         stack.push(6);
@@ -27,6 +29,7 @@ class StackTest extends Specification {
         stack.pop() == 6
         stack.pop() == 2
         stack.pop() == 1
+        stack.isEmpty()
 
     }
 }
