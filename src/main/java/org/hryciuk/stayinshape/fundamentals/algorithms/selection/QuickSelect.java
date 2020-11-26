@@ -25,12 +25,10 @@ public class QuickSelect {
         int hi = high;
         while (lo < hi) {
             int pivotIndex = partition(arr, lo, hi);
-            if (pivotIndex == k) {
-                break;
-            } else if (pivotIndex > k) {
-                hi = pivotIndex - 1;
-            } else {
+            if (pivotIndex < k) {
                 lo = pivotIndex + 1;
+            } else {
+                hi = pivotIndex;
             }
         }
         return Arrays.copyOfRange(arr, 0, k);
@@ -41,12 +39,10 @@ public class QuickSelect {
         int hi = high;
         while (lo < hi) {
             int pivotIndex = partition(arr, lo, hi);
-            if (pivotIndex == k) {
-                break;
-            } else if (pivotIndex > k) {
-                hi = pivotIndex - 1;
-            } else {
+            if (pivotIndex < k) {
                 lo = pivotIndex + 1;
+            } else {
+                hi = pivotIndex;
             }
         }
         return Arrays.copyOfRange(arr, k, arr.length);
@@ -57,12 +53,10 @@ public class QuickSelect {
         int hi = high;
         while (lo < hi) {
             int pivotIndex = partition(arr, lo, hi);
-            if (pivotIndex == k) {
-                return arr[k];
-            } else if (pivotIndex > k) {
-                hi = pivotIndex - 1;
-            } else {
+            if (pivotIndex < k) {
                 lo = pivotIndex + 1;
+            } else {
+                hi = pivotIndex;
             }
         }
         return arr[lo];
