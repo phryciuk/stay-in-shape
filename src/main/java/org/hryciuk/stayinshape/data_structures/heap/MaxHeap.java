@@ -44,7 +44,6 @@ public class MaxHeap {
     }
 
     public void removeFromHeap() {
-        ensureCapacity();
         swap(0, size - 1, heap);
         maxHeapify(this.heap, 0);
         size--;

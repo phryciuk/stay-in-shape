@@ -13,7 +13,7 @@ class KClosestPointsToOriginTest extends Specification {
         Map<String, Integer> exp = new HashMap<>();
 
         when:
-        int[][] actual = kClosestPointsToOrigin.kClosestQuickSelect(points, k);
+        int[][] actual = kClosestPointsToOrigin.kClosestOwnHeap(points, k);
 
         def expectedList = Arrays.asList(expected)
         for (int[] el : expectedList) {

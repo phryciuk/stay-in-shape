@@ -5,10 +5,10 @@ import spock.lang.Specification
 class QuicksortHoareTest extends Specification {
     def 'should sort elements using quicksort algorithm'(int[] input, int[] expected) {
         given:
-        QuicksortHoare quickSort = new QuicksortHoare(input)
+        QuicksortHoare quickSort = new QuicksortHoare()
 
         when:
-        quickSort.quickSort(input, 0, input.length - 1)
+        quickSort.sort(input)
 
         then:
         input == expected
