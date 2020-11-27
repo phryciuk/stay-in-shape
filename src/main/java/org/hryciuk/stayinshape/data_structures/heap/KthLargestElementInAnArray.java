@@ -18,60 +18,46 @@ package org.hryciuk.stayinshape.data_structures.heap;
  */
 public class KthLargestElementInAnArray {
 
-
-    public int findKthLargest(int[] nums, int k) {
-        heapify(nums);
-        heapSort(nums);
-        return nums[k - 1];
+    public int findKthLargest(int[] arr, int k) {
+        buildMinHeap(arr);
+        int size = arr.length;
+        for (int i = 0; i < arr.length - k; ++i) {
+            removeRoot(arr, size--);
+        }
+        return arr[0];
     }
 
+    private void removeRoot(int[] arr, int size) {
+        swap(arr, 0, size - 1);
+        minHeapify(arr, 0, size - 1);
+    }
 
-    private void heapSort(int[] nums) {
-        for (int i = 0; i < nums.length; ++i) {
-            removeRoot(nums, i);
+    private void buildMinHeap(int[] arr) {
+        for (int i = arr.length / 2; i >= 0; i--) {
+            minHeapify(arr, i, arr.length);
         }
     }
 
-    private void removeRoot(int[] nums, int index) {
-        int lastIndexOfArray = nums.length - 1;
-        int currentIndex = 0;
-        swap(0, lastIndexOfArray - index, nums); // zamieniamy root z ostatnim elementem w stercie. od teraz sterta ma rozmiar o 1 mniejszy
-        int leftChildIndex = 1;
-        int rightChildIndex = 2;
-        int lastIndexOfHeap = lastIndexOfArray - index - 1;
-        while (leftChildIndex <= lastIndexOfHeap) {
-            if (rightChildIndex <= lastIndexOfHeap && nums[rightChildIndex] < nums[currentIndex] && nums[rightChildIndex] < nums[leftChildIndex]) {
-                swap(currentIndex, rightChildIndex, nums);
-                currentIndex = rightChildIndex;
-            } else if (nums[leftChildIndex] <= nums[currentIndex]) {
-                swap(currentIndex, leftChildIndex, nums);
-                currentIndex = leftChildIndex;
-            } else {
-                break;
-            }
-            leftChildIndex = currentIndex * 2 + 1;
-            rightChildIndex = currentIndex * 2 + 2;
+    private void minHeapify(int[] arr, int i, int size) {
+        int smallestIndex = i;
+        int leftIndex = i * 2 + 1;
+        int rightIndex = i * 2 + 2;
+
+        if (leftIndex < size && arr[leftIndex] < arr[smallestIndex]) {
+            smallestIndex = leftIndex;
+        }
+        if (rightIndex < size && arr[rightIndex] < arr[smallestIndex]) {
+            smallestIndex = rightIndex;
+        }
+        if (smallestIndex != i) {
+            swap(arr, i, smallestIndex);
+            minHeapify(arr, smallestIndex, size);
         }
     }
 
-    private void swap(int firstIndex, int secondIndex, int[] nums) {
-        int nodeValue = nums[firstIndex];
-        int tmp = nodeValue;
-        int otherValue = nums[secondIndex];
-        nums[firstIndex] = otherValue;
-        nums[secondIndex] = tmp;
-    }
-
-    private void heapify(int[] nums) {
-        for (int i = 0; i < nums.length; ++i) {
-            int value = nums[i];
-            int j = i;
-            int parentIndex = (j - 1) / 2;
-            while (nums[parentIndex] > value) {
-                swap(j, parentIndex, nums);
-                j = parentIndex;
-                parentIndex = (j - 1) / 2;
-            }
-        }
+    private void swap(int[] arr, int i, int j) {
+        int tmp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = tmp;
     }
 }
