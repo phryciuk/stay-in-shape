@@ -64,7 +64,8 @@ public class BinarySearch {
     }
 
     public int binarySearchOnSortedDescending(int[] arr, int target) {
-        int lo = 0; int hi = arr.length - 1;
+        int lo = 0;
+        int hi = arr.length - 1;
         while (lo < hi) {
             int mid = lo + (hi - lo) / 2;
             if (arr[mid] > target) {
@@ -74,6 +75,24 @@ public class BinarySearch {
             }
         }
         return arr[lo] == target ? lo : -1;
+    }
+
+    public int binarySearch(int[] arr, int target) {
+        return bsHelper(arr, 0, arr.length - 1, target);
+    }
+
+    private int bsHelper(int[] arr, int lo, int hi, int target) {
+        if (lo < 0 || hi >= arr.length || lo > hi) {
+            return -1;
+        }
+        int mid = lo + (hi - lo) / 2;
+        if (arr[mid] == target) {
+            return mid;
+        } else if (arr[mid] < target) {
+            return bsHelper(arr, mid + 1, hi, target);
+        } else {
+            return bsHelper(arr, lo, mid - 1, target);
+        }
     }
 
 

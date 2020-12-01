@@ -13,7 +13,7 @@ class LowestCommonAncestorOfABinaryTreeTest extends Specification {
 
         when:
         LowestCommonAncestorOfABinaryTree lowestCommonAncestorOfABinaryTree = new LowestCommonAncestorOfABinaryTree()
-        TreeNode actual = lowestCommonAncestorOfABinaryTree.lowestCommonAncestorSimplest(root, pTree, qTree)
+        TreeNode actual = lowestCommonAncestorOfABinaryTree.lowestCommonAncestor2(root, pTree, qTree)
         def subtree = TreeUtil.findSubtree(root, expected)
 
         then:

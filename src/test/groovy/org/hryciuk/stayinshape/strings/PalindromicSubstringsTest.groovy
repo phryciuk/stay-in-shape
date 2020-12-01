@@ -11,7 +11,7 @@ class PalindromicSubstringsTest extends Specification {
         PalindromicSubstrings palindromicSubstrings = new PalindromicSubstrings()
 
         when:
-        int actual = palindromicSubstrings.countSubstrings(input)
+        int actual = palindromicSubstrings.countSubstrings2(input)
 
         then:
         actual == expected

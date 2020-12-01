@@ -12,7 +12,7 @@ class SymmetricTreeTest extends Specification {
         SymmetricTree symmetricTree = new SymmetricTree()
 
         when:
-        boolean actual = symmetricTree.isSymmetricA(root)
+        boolean actual = symmetricTree.isSymmetric3(root)
 
         then:
         actual == expected
