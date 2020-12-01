@@ -12,7 +12,7 @@ class BinarySearchTest extends Specification {
         BinarySearch binarySearch = new BinarySearch();
 
         when:
-        def actual = binarySearch.binarySearchHigherMid(target, input)
+        def actual = binarySearch.binarySearch( input, target)
 
         then:
         actual == expected
