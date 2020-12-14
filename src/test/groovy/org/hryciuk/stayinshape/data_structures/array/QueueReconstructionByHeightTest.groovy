@@ -11,7 +11,7 @@ class QueueReconstructionByHeightTest extends Specification {
         int[][] actual = queueReconstructionByHeight.reconstructQueue(input)
 
         then:
-        Arrays.equals(actual, expected)
+        Arrays.deepEquals(actual, expected)
 
         where:
         input                                            || expected

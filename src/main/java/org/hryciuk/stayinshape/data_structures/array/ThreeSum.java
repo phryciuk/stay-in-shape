@@ -19,44 +19,37 @@ import java.util.*;
 public class ThreeSum {
 
     public List<List<Integer>> threeSum(int[] nums) {
-        LinkedList<Integer> ok = new LinkedList<>();
-        ok.poll();
         List<List<Integer>> result = new ArrayList<>();
+        Set<List<Integer>> set = new HashSet<>();
         for (int i = 0; i < nums.length; ++i) {
-            List<Integer> tempResult = new ArrayList<>();
-            int[] twoIndices = twoSum(nums[i] * -1, nums, i);
-            if (twoIndices != null) {
-                tempResult.add(nums[twoIndices[0]]);
-                tempResult.add(nums[twoIndices[1]]);
-                tempResult.add(nums[i]);
-                int index = i;
-                if (!result.isEmpty()) {
-                    if (result.stream().anyMatch(list -> (list.contains(nums[twoIndices[0]]) && list.contains(nums[twoIndices[1]]) && list.contains(nums[index])))) {
-                        continue;
-                    }
-                }
-                result.add(tempResult);
+            int current = nums[i];
+            List<Integer> subresult = twoSum(current * - 1, nums, i);
+            if (!subresult.isEmpty()) {
+                Collections.sort(subresult);
+                set.add(subresult);
             }
         }
+        result.addAll(set);
         return result;
     }
 
-    private int[] twoSum(int target, int[] nums, int indexToOmit) {
-        Map<Integer, Integer> map = new HashMap<>(); // number, index
+    private List<Integer> twoSum(int target, int[] nums, int indexToOmit) {
+        List<Integer> result = new ArrayList<>();
+        Map<Integer, Integer> map = new HashMap<>();
         for (int i = 0; i < nums.length; ++i) {
-            if (indexToOmit == i) {
+            if (i == indexToOmit) {
                 continue;
             }
-            if (map.get(nums[i]) == null) {
-                map.put(target - nums[i], i);
-            } else {
-                int[] result = new int[2];
-                result[0] = map.get(nums[i]);
-                result[1] = i;
+            if (map.containsKey(target - nums[i])) {
+                result.add(nums[i]);
+                result.add(target - nums[i]);
+                result.add(-1 * target);
                 return result;
+            } else {
+                map.put(nums[i], i);
             }
         }
-        return null;
+        return result;
     }
 
 

@@ -19,27 +19,31 @@ package org.hryciuk.stayinshape.strings;
  * Output: false
  */
 public class ValidPalindrome {
+
     public boolean isPalindrome(String s) {
-        if (s.isEmpty()) {
+        if (s == null || s.length() == 0) {
             return true;
         }
-        char[] charArray = s.toCharArray();
-        int head = 0;
-        int tail = s.length() - 1;
-        while (head <= tail) {
-            char headChar = charArray[head];
-            char tailChar = charArray[tail];
-            if (!Character.isLetterOrDigit(headChar)) {
-                head++;
-            } else if (!Character.isLetterOrDigit(tailChar)) {
-                tail--;
-            } else {
-                if (Character.toLowerCase(charArray[head]) != Character.toLowerCase(charArray[tail])) {
-                    return false;
-                }
-                head++;
-                tail--;
+        s = s.toLowerCase();
+        char[] arr = s.toCharArray();
+        int lo = 0;
+        int hi = arr.length - 1;
+        while (lo < hi) {
+            char front = arr[lo];
+            char back = arr[hi];
+            if (!Character.isLetterOrDigit(front)) {
+                lo++;
+                continue;
             }
+            if (!Character.isLetterOrDigit(back)) {
+                hi--;
+                continue;
+            }
+            if (front != back) {
+                return false;
+            }
+            lo++;
+            hi--;
         }
         return true;
     }

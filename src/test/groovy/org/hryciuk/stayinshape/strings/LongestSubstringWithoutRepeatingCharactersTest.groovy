@@ -22,6 +22,7 @@ class LongestSubstringWithoutRepeatingCharactersTest extends Specification {
         "ababab"   | 2
         "dvdf"     | 3
         "abba"     | 2
+        "abc"      | 3
 
     }
 }

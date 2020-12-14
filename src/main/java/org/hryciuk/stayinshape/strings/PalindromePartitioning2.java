@@ -75,39 +75,38 @@ public class PalindromePartitioning2 {
         }
         return cuts[n - 1];
     }
-
-    public int minCut2(String s) {
+    public int palindromePartition(String s) {
         if (s == null || s.length() == 0) {
             return 0;
         }
-        boolean[][] isPalindrome = new boolean[s.length()][s.length()];
+        char[] arr = s.toCharArray();
+        int len = arr.length;
+        boolean[][] isPalindrome = new boolean[len][len];
 
-        // strings of length 1
-        for (int i = 0; i < s.length(); ++i) {
+        // 1 char strings
+        for (int i = 0 ; i < len; ++i) {
             isPalindrome[i][i] = true;
         }
 
-        // 2 characters
-        for (int i = 1; i < s.length(); ++i) {
-            if (s.charAt(i - 1) == s.charAt(i)) {
+        // 2 char strings
+        for (int i = 1; i < len; ++i) {
+            if (arr[i - 1] == arr[i]) {
                 isPalindrome[i - 1][i] = true;
             }
         }
 
-        // 3 characters and longer
-        for (int j = 2; j < s.length(); ++j) {
+        // 3 and more characters
+        for (int j = 2; j < len; ++j) {
             for (int i = 0; i < j - 1; ++i) {
-                if (s.charAt(i) == s.charAt(j) && isPalindrome[i + 1][j - 1]) {
+                if (arr[i] == arr[j] && isPalindrome[i + 1][j - 1]) {
                     isPalindrome[i][j] = true;
                 }
             }
         }
 
-        int[] minCuts = new int[s.length()];
+        int[] minCuts = new int[len];
         Arrays.fill(minCuts, Integer.MAX_VALUE);
-
-
-        for (int j = 0; j < s.length(); ++j) {
+        for (int j = 0; j < len; ++j) {
             if (isPalindrome[0][j]) {
                 minCuts[j] = 0;
             } else {
@@ -118,8 +117,6 @@ public class PalindromePartitioning2 {
                 }
             }
         }
-        return minCuts[s.length() - 1];
+        return minCuts[len - 1];
     }
-
-
 }

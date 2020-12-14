@@ -124,7 +124,7 @@ public class ZeroOneKnapsackProblem {
         if (currentCapacity <= 0 || currentIndex >= profit.length) {
             return 0;
         }
-        // now we have to options:
+        // now we have 2 options:
         // - include the element
         // - do not include the element
         int profitWithItemIncluded = 0;
