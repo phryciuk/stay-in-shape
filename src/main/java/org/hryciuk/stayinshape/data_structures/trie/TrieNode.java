@@ -1,9 +1,10 @@
 package org.hryciuk.stayinshape.data_structures.trie;
 
 public class TrieNode {
-    private TrieNode[] children = new TrieNode[26];
+    public static final int ALPHABET_SIZE = 26;
+    private TrieNode[] children = new TrieNode[ALPHABET_SIZE];
     private char value;
-    private boolean isWord;
+    private boolean isEndOfWord;
 
     public TrieNode() {
     }
@@ -20,11 +21,11 @@ public class TrieNode {
         return value;
     }
 
-    public boolean isWord() {
-        return isWord;
+    public boolean isEndOfWord() {
+        return isEndOfWord;
     }
 
     public void setEndOfWord(boolean word) {
-        isWord = word;
+        isEndOfWord = word;
     }
 }

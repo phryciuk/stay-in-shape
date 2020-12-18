@@ -30,7 +30,7 @@ public class Trie {
             }
             current = current.getChildren()[currentChar - 'a'];
         }
-        return current.isWord();
+        return current.isEndOfWord();
     }
 
     private Trie createExampleTrie() {
