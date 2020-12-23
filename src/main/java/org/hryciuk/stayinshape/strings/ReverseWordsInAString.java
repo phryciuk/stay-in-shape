@@ -1,5 +1,6 @@
 package org.hryciuk.stayinshape.strings;
 
+import java.util.Arrays;
 import java.util.Stack;
 
 /**
@@ -86,5 +87,60 @@ public class ReverseWordsInAString {
             }
         }
         return sb.toString();
+    }
+
+    public String reverseWordsInAString(String s) {
+        if (s == null || s.length() == 0) {
+            return s;
+        }
+        char[] arr = s.toCharArray();
+        reverse2(arr, 0, arr.length - 1);
+        char[] result = new char[arr.length];
+        for (int i = 0; i < arr.length; ++i) {
+            while (i < arr.length && arr[i] == ' ') {
+                i++;
+            }
+            int start = i;
+            while (i < arr.length && arr[i] != ' ') {
+                i++;
+            }
+            i = i - 1;
+            int end = i;
+            reverse2(arr, start, end);
+        }
+        int resultIndex = 0;
+        int index = 0;
+        // remove entry spaces
+        while (index < arr.length && arr[index] == ' ') {
+            index++;
+        }
+        // now index is at first char of a word
+        while (index < arr.length) {
+            int start = index;
+            while(index < arr.length && arr[index] != ' ') {
+                result[resultIndex++] = arr[index];
+                index++;
+            }
+            // now the index is right after the last word, and it is on space
+            // remove spaces in between words
+            while (index < arr.length && arr[index] == ' ') {
+                result[resultIndex] = ' ';
+                index++;
+            }
+            resultIndex++;
+        }
+
+        return new String(Arrays.copyOfRange(result, 0, resultIndex - 1));
+    }
+
+
+    private void reverse2(char[] arr, int lo, int hi) {
+        while (lo < hi) {
+            char tmp = arr[lo];
+            arr[lo] = arr[hi];
+            arr[hi] = tmp;
+            lo++;
+            hi--;
+        }
     }
 }
