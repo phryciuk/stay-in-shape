@@ -53,4 +53,28 @@ public class ValidateBinarySearchTree {
         boolean right = isItBinarySearchTree(root.right, deque);
         return left && right;
     }
+
+    public boolean validBinarySearchTree(TreeNode root) {
+        if (root == null) {
+            return true;
+        }
+        boolean left = isValid2021(root.left, root.val, null);
+        boolean right = isValid2021(root.right, null, root.val);
+        return left && right;
+    }
+
+    private boolean isValid2021(TreeNode root, Integer upperBound, Integer lowerBound) {
+        if (root == null) {
+            return true;
+        }
+        boolean left = isValid2021(root.left, root.val, lowerBound);
+        if (lowerBound != null && root.val <= lowerBound) {
+            return false;
+        }
+        if (upperBound != null && root.val >= upperBound) {
+            return false;
+        }
+        boolean right = isValid2021(root.right, upperBound, root.val);
+        return left && right;
+    }
 }

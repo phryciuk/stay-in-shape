@@ -119,4 +119,47 @@ public class PalindromePartitioning2 {
         }
         return minCuts[len - 1];
     }
+
+    public int minCuts(String s) {
+        if (s == null || s.length() == 0) {
+            return 0;
+        }
+        char[] arr = s.toCharArray();
+        int len = arr.length;
+        boolean[][] isPalindrome = new boolean[len][len];
+
+        // 1 letter palindromes
+        for (int i = 0; i < len; ++i) {
+            isPalindrome[i][i] = true;
+        }
+        // 2 letter palindromes
+        for (int i = 1; i < len; ++i) {
+            if (arr[i - 1] == arr[i]) {
+                isPalindrome[i - 1][i] = true;
+            }
+        }
+        // 3 or more letter palindromes
+        for (int j = 2; j < len; ++j) {
+            for (int i = 0; i < j - 1; ++i) {
+                if (arr[i] == arr[j] && isPalindrome[i + 1][j - 1]) {
+                    isPalindrome[i][j] = true;
+                }
+            }
+        }
+
+        int[] minCuts = new int[len];
+        Arrays.fill(minCuts, Integer.MAX_VALUE);
+        for (int j = 0; j < len; ++j) {
+            if (isPalindrome[0][j]) {
+                minCuts[j] = 0;
+            } else {
+                for (int i = 1; i <= j; ++i) {
+                    if (isPalindrome[i][j]) {
+                        minCuts[j] = Math.min(minCuts[j], minCuts[i - 1] + 1);
+                    }
+                }
+            }
+        }
+        return minCuts[len - 1];
+    }
 }

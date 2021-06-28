@@ -9,7 +9,7 @@ class MaximumSubarrayOfSizeKTest extends Specification {
         MaximumSubarrayOfSizeK maximumSubSubarrayOfSizeK = new MaximumSubarrayOfSizeK()
 
         when:
-        double actual = maximumSubSubarrayOfSizeK.maximumSum(input, k)
+        double actual = maximumSubSubarrayOfSizeK.maxSumOfContiguousSubarray(input, k)
 
         then:
         actual == expected

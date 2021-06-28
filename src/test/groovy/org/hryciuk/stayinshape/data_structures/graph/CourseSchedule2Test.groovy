@@ -10,7 +10,7 @@ class CourseSchedule2Test extends Specification {
         CourseSchedule2 courseSchedule = new CourseSchedule2()
 
         when:
-        int[] actual = courseSchedule.findOrder2(numberOfCourses, prerequisites)
+        int[] actual = courseSchedule.canSchedule(numberOfCourses, prerequisites)
 
         then:
         actual.size() == expected.size();

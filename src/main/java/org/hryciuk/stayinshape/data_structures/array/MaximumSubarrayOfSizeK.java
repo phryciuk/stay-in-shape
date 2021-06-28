@@ -32,4 +32,23 @@ public class MaximumSubarrayOfSizeK {
         return maximumSum;
     }
 
+    public int maxSumOfContiguousSubarray(int[] nums, int k) {
+        if (nums == null || nums.length == 0) {
+            return 0;
+        }
+        int max = 0;
+        int start = 0;
+        int sum = 0;
+        for (int i = 0; i < nums.length; ++i) {
+            int current = nums[i];
+            sum += current;
+            if (i - start + 1 == k) {
+                max = Math.max(max, sum);
+                sum -= nums[start];
+                start++;
+            }
+        }
+        return max;
+    }
+
 }

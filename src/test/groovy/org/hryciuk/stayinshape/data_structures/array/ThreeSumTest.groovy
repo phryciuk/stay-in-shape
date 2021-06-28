@@ -10,7 +10,7 @@ class ThreeSumTest extends Specification {
         ThreeSum threeSum = new ThreeSum()
 
         when:
-        def actual = threeSum.threeSum(input)
+        def actual = threeSum.threeSum2(input)
 
         then:
         expected3sum.length == actual.size()
@@ -19,5 +19,6 @@ class ThreeSumTest extends Specification {
         input                                             | expected3sum
         [-1, 0, 1, 2, -1, -4]                             | [[-1, 0, 1], [-1, -1, 2]]
         [-4, -2, -2, -2, 0, 1, 2, 2, 2, 3, 3, 4, 4, 6, 6] | [[-4, -2, 6], [-4, 0, 4], [-4, 1, 3], [-4, 2, 2], [-2, -2, 4], [-2, 0, 2]]
+        [0, 0]                                            | []
     }
 }

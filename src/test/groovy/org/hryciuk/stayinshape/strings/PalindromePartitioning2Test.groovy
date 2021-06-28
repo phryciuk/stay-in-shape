@@ -9,7 +9,7 @@ class PalindromePartitioning2Test extends Specification {
         PalindromePartitioning2 palindromePartitioning2 = new PalindromePartitioning2()
 
         when:
-        def actual = palindromePartitioning2.palindromePartition(input)
+        def actual = palindromePartitioning2.minCuts(input)
 
         then:
         expectedCuts == actual

@@ -26,96 +26,33 @@ public class FindFirstAndLastPositionOfElementInSortedArray {
         if (nums == null || nums.length == 0) {
             return new int[]{-1, -1};
         }
-        int first = binarySearchForFirstOccurrence(nums, target);
-        int last = binarySearchForLastOccurrence(nums, target);
-        int[] result = new int[]{first, last};
-        return result;
+        return new int[]{findLowestIndexOfTarget(nums, target), findHighestIndexOfTarget(nums, target)};
     }
 
-    private int binarySearchForFirstOccurrence(int[] nums, int target) {
-        int lo = 0;
-        int hi = nums.length - 1;
-        while (lo < hi) {
-            int mid = lo + (hi - lo) / 2;
-            if (target > nums[mid]) {
-                lo = mid + 1;
-            } else {
-                if (target == nums[mid]) {
-                    hi = mid;
-                } else {
-                    hi = mid - 1;
-                }
-            }
-        }
-        if (lo >= nums.length) {
-            return nums[lo - 1] == target ? lo - 1 : -1;
-        }
-        return nums[lo] == target ? lo : -1;
-    }
-
-    private int binarySearchForLastOccurrence(int[] nums, int target) {
+    private int findHighestIndexOfTarget(int[] nums, int target) {
         int lo = 0;
         int hi = nums.length - 1;
         while (lo < hi) {
             int mid = lo + (hi - lo + 1) / 2;
-            if (target > nums[mid]) {
-                lo = mid + 1;
+            if (nums[mid] > target) {
+                hi = mid - 1;
             } else {
-                if (target == nums[mid]) {
-                    lo = mid;
-                } else {
-                    hi = mid - 1;
-                }
+                lo = mid;
             }
-        }
-        if (lo >= nums.length) {
-            return nums[lo - 1] == target ? lo - 1 : -1;
         }
         return nums[lo] == target ? lo : -1;
     }
 
-    private int binarySearchFirst(int[] nums, int target) {
+    private int findLowestIndexOfTarget(int[] nums, int target) {
         int lo = 0;
         int hi = nums.length - 1;
         while (lo < hi) {
             int mid = lo + (hi - lo) / 2;
-            if (nums[mid] > target) {
-                hi = mid - 1;
-            } else if (nums[mid] < target) {
+            if (nums[mid] < target) {
                 lo = mid + 1;
             } else {
-                if (mid - 1 >= 0 && nums[mid - 1] < nums[mid]) {
-                    return mid;
-                } else {
-                    hi = mid - 1;
-                }
+                hi = mid;
             }
-        }
-        if (hi < 0) {
-            return nums[hi + 1] == target ? hi + 1 : -1;
-        }
-        return nums[hi] == target ? hi : -1;
-    }
-
-    private int binarySearchLast(int[] nums, int target) {
-        int lo = 0;
-        int hi = nums.length - 1;
-        while (lo < hi) {
-            int mid = lo + (hi - lo) / 2;
-            if (nums[mid] > target) {
-                hi = mid - 1;
-            } else if (nums[mid] < target) {
-                lo = mid + 1;
-            } else {
-                if (mid + 1 < nums.length && nums[mid + 1] > nums[mid]) {
-                    return mid;
-                } else {
-                    lo = mid + 1;
-                }
-            }
-        }
-        if (lo >= nums.length) {
-            return nums[lo - 1] == target ? lo - 1 : -1;
         }
         return nums[lo] == target ? lo : -1;
     }

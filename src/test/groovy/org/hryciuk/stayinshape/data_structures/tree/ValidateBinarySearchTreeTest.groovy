@@ -12,7 +12,7 @@ class ValidateBinarySearchTreeTest extends Specification {
         TreeNode root = TreeUtil.createFromArray(tree)
 
         when:
-        boolean actual = validateBinarySearchTree.isValidBST(root)
+        boolean actual = validateBinarySearchTree.validBinarySearchTree(root)
 
         then:
         actual == expected

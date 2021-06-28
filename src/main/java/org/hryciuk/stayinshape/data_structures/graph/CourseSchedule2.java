@@ -51,4 +51,48 @@ public class CourseSchedule2 {
             return new int[0];
         }
     }
+
+    public int[] canSchedule(int numCourses, int[][] prerequisites) {
+        // initialize graph
+        Map<Integer, List<Integer>> graph = new HashMap<>();
+        for (int i = 0; i < numCourses; ++i) {
+            graph.put(i, new ArrayList<>());
+        }
+
+        // indegree array
+        int[] indegrees = new int[numCourses];
+
+        // build graph and indegrees
+        for (int i = 0; i < prerequisites.length; ++i) {
+            int[] prerequisite = prerequisites[i];
+            graph.get(prerequisite[1]).add(prerequisite[0]);
+            indegrees[prerequisite[0]]++;
+        }
+        Deque<Integer> q = new LinkedList<>();
+
+        // find nodes with indegree of 0
+        for (int i = 0; i < indegrees.length; ++i) {
+            if (indegrees[i] == 0) {
+                q.add(i);
+            }
+        }
+
+        int totalEdges = prerequisites.length;
+        int[] result = new int[numCourses];
+        int index = 0;
+        while (!q.isEmpty()) {
+            int node = q.poll();
+            List<Integer> edges = graph.get(node);
+            for (int i = 0; i < edges.size(); ++i) {
+                int currentEdge = edges.get(i);
+                indegrees[currentEdge]--;
+                if (indegrees[currentEdge] == 0) {
+                    q.add(currentEdge);
+                }
+                totalEdges--;
+            }
+            result[index++] = node;
+        }
+        return totalEdges == 0 ? result : new int[]{};
+    }
 }

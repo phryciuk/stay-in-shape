@@ -35,20 +35,20 @@ public class BinaryTreePaths {
         return result;
     }
 
-    void dfs(TreeNode root, String str, List<String> result) {
+    private void dfs(TreeNode root, String current, List<String> result) {
         if (root == null) {
             return;
         }
+        current += root.val;
         if (root.left == null && root.right == null) {
-            result.add(str + "" + root.val);
+            result.add(current);
             return;
         }
-        str += "" + root.val;
         if (root.left != null) {
-            dfs(root.left, str + "->", result);
+            dfs(root.left, current + "->", result);
         }
         if (root.right != null) {
-            dfs(root.right, str + "->", result);
+            dfs(root.right, current + "->", result);
         }
     }
 }
