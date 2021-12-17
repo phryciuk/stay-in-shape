@@ -21,6 +21,7 @@ public class MaxHeap {
         }
     }
 
+    // O(log(n))
     void insertToMaxHeap(int value) {
         ensureCapacity();
         int index = size;
