@@ -8,7 +8,7 @@ class ReverseWordsInAStringTest extends Specification {
         ReverseWordsInAString reverseWordsInAString = new ReverseWordsInAString()
 
         when:
-        String actual = reverseWordsInAString.reverseWordsInAString(input)
+        String actual = reverseWordsInAString.reverseWords3(input)
 
         then:
         actual == expected

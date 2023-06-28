@@ -1,54 +1,46 @@
 package org.hryciuk.stayinshape.fundamentals.algorithms.sorting;
 
+import java.util.ArrayList;
+import java.util.List;
+
 class MergeSort {
-    private int[] array;
 
-    public MergeSort(int[] array) {
-        this.array = array;
-    }
-
-    void mergeSort(int p, int r) {
-        if (p < r) {
-            int q = (p + r) / 2; // this is actual floor
-            mergeSort(p, q);
-            mergeSort(q + 1, r);
-            merge(p, q, r);
+    void mergeSort(int[] arr, int lo, int hi) {
+        if (lo < hi) {
+            int mid = lo + (hi - lo) / 2; // this is actual floor
+            mergeSort(arr, lo, mid);
+            mergeSort(arr, mid + 1, hi);
+            merge(arr, lo, mid, hi);
         }
     }
 
-    // p, q, r - indeksy początku środka i końca
-    void merge(int p, int q, int r) {
-        int leftSize = q - p + 1;
-        int rightSize = r - q;
-        int[] leftArray = new int[leftSize + 1];
-        int[] rightArray = new int[rightSize + 1];
-
-        for (int i = 0; i < leftSize; ++i) {
-            leftArray[i] = array[p + i];
-        }
-        for (int j = 0; j < rightSize; ++j) {
-            rightArray[j] = array[q + j + 1];
-        }
-
-        leftArray[leftSize] = Integer.MAX_VALUE;
-        rightArray[rightSize] = Integer.MAX_VALUE;
-
-        int i = 0;
-        int j = 0;
-
-        // r + 1 bo dla przypadku gdy mergujemy 2 elementy np. p = 0, r = 1 to wtedy musimy obydwa przestawić
-        for (int k = p; k < r + 1; ++k) {
-            if (leftArray[i] <= rightArray[j]) {
-                array[k] = leftArray[i];
-                i++;
+    void merge(int[] arr, int lo, int mid, int hi) {
+        List<Integer> tmp = new ArrayList<>();
+        int left = lo;
+        int right = mid + 1;
+        while (left <= mid && right <= hi) {
+            if (arr[left] <= arr[right]) {
+                tmp.add(arr[left]);
+                left++;
             } else {
-                array[k] = rightArray[j];
-                j++;
+                tmp.add(arr[right]);
+                right++;
             }
         }
-    }
 
-    public int[] getArray() {
-        return array;
+        // elements on the right moved; we just copy elements from left
+        while (left <= mid) {
+            tmp.add(arr[left]);
+            left++;
+        }
+        // elements on the left moved; we just copy elements from right
+        while (right <= hi) {
+            tmp.add(arr[right]);
+            right++;
+        }
+        // copy tmp array to final array
+        for (int i = lo; i <= hi; ++i) {
+            arr[i] = tmp.get(i - lo);
+        }
     }
 }

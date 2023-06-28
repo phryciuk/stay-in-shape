@@ -8,7 +8,7 @@ class ZeroOneKnapsackProblemTest extends Specification {
         ZeroOneKnapsackProblem zeroOneKnapsackProblem = new ZeroOneKnapsackProblem()
 
         when:
-        int actual = zeroOneKnapsackProblem.findMaximumProfitBottomUpSpaceOptimized(weight, profit, capacity)
+        int actual = zeroOneKnapsackProblem.maxProfit(weight, profit, capacity)
 
         then:
 //        result.size() == expected.size()

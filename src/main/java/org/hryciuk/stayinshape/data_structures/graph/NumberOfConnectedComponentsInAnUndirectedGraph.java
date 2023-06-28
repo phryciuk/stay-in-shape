@@ -1,5 +1,7 @@
 package org.hryciuk.stayinshape.data_structures.graph;
 
+import java.util.*;
+
 public class NumberOfConnectedComponentsInAnUndirectedGraph {
 
     public int countComponents(int n, int[][] edges) {
@@ -8,6 +10,42 @@ public class NumberOfConnectedComponentsInAnUndirectedGraph {
             uf.unify(edge[0], edge[1]);
         }
         return uf.numberOfComponents();
+    }
+
+    // BFS solution
+    public int countComponentsBFS(int n, int[][] edges) {
+        Map<Integer, List<Integer>> adjacencyList = new HashMap<>();
+        for (int[] edge : edges) {
+            int vertex1 = edge[0];
+            int vertex2 = edge[1];
+            List<Integer> neighbors1 = adjacencyList.getOrDefault(vertex1, new ArrayList<>());
+            neighbors1.add(vertex2);
+            adjacencyList.put(vertex1, neighbors1);
+            List<Integer> neighbors2 = adjacencyList.getOrDefault(vertex2, new ArrayList<>());
+            neighbors2.add(vertex1);
+            adjacencyList.put(vertex2, neighbors2);
+        }
+        boolean[] visited = new boolean[n];
+        Deque<Integer> q = new LinkedList<>();
+        int numberOfComponents = 0;
+        for (int i = 0; i < n; ++i) {
+            if (!visited[i]) {
+                q.add(i);
+                while (!q.isEmpty()) {
+                    int current = q.pop();
+                    if (visited[current]) {
+                        continue;
+                    }
+                    visited[current] = true;
+                    List<Integer> neighbors = adjacencyList.get(current);
+                    for (int j = 0; j < neighbors.size(); ++j) {
+                        q.add(neighbors.get(j));
+                    }
+                }
+                numberOfComponents++;
+            }
+        }
+        return numberOfComponents;
     }
 }
 
@@ -65,3 +103,6 @@ class UnionFind {
         return numberOfComponents;
     }
 }
+
+
+

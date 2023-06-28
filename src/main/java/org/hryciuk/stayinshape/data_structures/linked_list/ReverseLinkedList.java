@@ -1,4 +1,4 @@
-package org.hryciuk.stayinshape.data_structures.linked_list;
+  package org.hryciuk.stayinshape.data_structures.linked_list;
 
 class ReverseLinkedList {
 

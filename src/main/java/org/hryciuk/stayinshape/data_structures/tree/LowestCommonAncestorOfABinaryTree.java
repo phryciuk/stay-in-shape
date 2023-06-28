@@ -2,20 +2,27 @@ package org.hryciuk.stayinshape.data_structures.tree;
 
 import java.util.LinkedList;
 
+/*
+    Video lesson: https://www.youtube.com/watch?v=KobQcxdaZKY
+ */
 public class LowestCommonAncestorOfABinaryTree {
 
     public TreeNode lowestCommonAncestorSimplest(TreeNode root, TreeNode p, TreeNode q) {
         if (root == null ) {
             return null;
         }
+        // if root is onf of the values, then LCA is root
         if (root == p || root == q) {
             return root;
         }
+        // we do the DFS
         TreeNode left = lowestCommonAncestorSimplest(root.left, p, q);
         TreeNode right = lowestCommonAncestorSimplest(root.right, p, q);
+        // if both of the results are not null, then root is LCA
         if (left != null && right != null) {
             return root;
         }
+        // if only one of the branches returns something
         return left != null ? left : right;
     }
 

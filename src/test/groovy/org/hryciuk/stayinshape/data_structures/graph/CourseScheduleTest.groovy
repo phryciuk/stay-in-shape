@@ -9,7 +9,7 @@ class CourseScheduleTest extends Specification {
         CourseSchedule courseSchedule = new CourseSchedule()
 
         when:
-        boolean actual = courseSchedule.canFinish(numberOfCourses, prerequisites)
+        boolean actual = courseSchedule.canFinish2(numberOfCourses, prerequisites)
 
         then:
         actual == expected

@@ -1,6 +1,7 @@
 package org.hryciuk.stayinshape.data_structures.array;
 
 import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Given an array of integers, find if the array contains any duplicates.
@@ -8,10 +9,15 @@ import java.util.HashSet;
  */
 public class ContainsDuplicate {
     public boolean containsDuplicate(int[] nums) {
-        HashSet<Integer> set = new HashSet<>();
+        Set<Integer> set = new HashSet<>();
         for (int i = 0; i < nums.length; ++i) {
-            set.add(nums[i]);
+            int current = nums[i];
+            if (set.contains(current)) {
+                return true;
+            }
+            set.add(current);
         }
-        return set.size() != nums.length;
+        return false;
     }
 }
+

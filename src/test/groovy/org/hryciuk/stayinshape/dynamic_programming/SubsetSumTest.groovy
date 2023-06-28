@@ -8,7 +8,7 @@ class SubsetSumTest extends Specification {
         SubsetSum subsetSum = new SubsetSum()
 
         when:
-        boolean actual = subsetSum.subsetEqualToSum(nums, s)
+        boolean actual = subsetSum.subsetSumExist(nums, s)
 
         then:
         actual == expected

@@ -4,33 +4,37 @@ import java.util.*;
 
 public class CloneGraph {
 
+    // HashMap for storing cloned nodes
+    // Queue for processing the nodes of the original graph. BFS over the original graph.
     // time O(V + E) | space O(V)
-    public Node cloneGraph(Node node) {
-        Map<Integer, Node> clonedNodes = new HashMap<>();
+    public Node cloneGraph(Node root) {
+        if (root == null) {
+            return null;
+        }
+
+        Map<Integer, Node> clones = new HashMap<>();
+        Node clonedRoot = new Node(root.val);
+        clones.put(root.val, clonedRoot);
         Deque<Node> q = new LinkedList<>();
-        q.add(node);
-        Node clone = new Node(node.val);
-        clonedNodes.put(node.val, clone);
+        q.add(root);
+
         while (!q.isEmpty()) {
-            int size = q.size();
-            for (int i = 0; i < size; ++i) {
-                Node current = q.poll();
-                Node clonedCurrent = clonedNodes.get(current.val);
-                for (int j = 0; j < current.neighbors.size(); ++j) {
-                    Node neighbor = current.neighbors.get(j);
-                    if (clonedNodes.containsKey(neighbor.val)) {
-                        Node cloneOfCurrent = clonedNodes.get(neighbor.val);
-                        clonedCurrent.neighbors.add(cloneOfCurrent);
-                    } else {
-                        Node cloneOfCurrent = new Node(neighbor.val);
-                        q.add(neighbor);
-                        clonedNodes.put(cloneOfCurrent.val, cloneOfCurrent);
-                        clonedCurrent.neighbors.add(cloneOfCurrent);
-                    }
+            Node current = q.poll();
+            Node clone = clones.get(current.val);
+            List<Node> neighbors = current.neighbors;
+            for (int i = 0; i < neighbors.size(); ++i) {
+                Node currentNeighbor = neighbors.get(i);
+                if (clones.get(currentNeighbor.val) != null) {
+                    clone.neighbors.add(clones.get(currentNeighbor.val));
+                } else {
+                    Node clonedNeighbor = new Node(currentNeighbor.val);
+                    q.add(currentNeighbor);
+                    clones.put(currentNeighbor.val, clonedNeighbor);
+                    clone.neighbors.add(clonedNeighbor);
                 }
             }
         }
-        return clone;
+        return clonedRoot;
     }
 
 }

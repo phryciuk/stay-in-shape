@@ -1,76 +1,87 @@
 package org.hryciuk.stayinshape.data_structures.hashmap;
 
+/**
+ * Key things to remember when implementing a hashmap:
+ * 1. First node in every bucket is always a dummy node. That helps with removal.
+ * 2. When inserting new element, while there is no entry in the bucket list, make sure dummy node is first created, and then the actual value is inserted
+ *
+ */
 public class DesignHashMap {
 
     private final int SIZE = 1_000;
 
-    private final ListNode[] buckets;
+    private final ListNode[] arr;
 
     /**
      * Initialize your data structure here.
      */
     public DesignHashMap() {
-        this.buckets = new ListNode[SIZE];
+        this.arr = new ListNode[SIZE];
     }
-
-    /**
-     * value will always be non-negative.
-     */
     public void put(int key, int value) {
+        remove(key);
         int index = hash(key);
-        if (this.buckets[index] == null) {
-            this.buckets[index] = new ListNode(-1, -1);
-        }
-        ListNode found = findKey(this.buckets[index], key);
-        if (found.next == null) {
-            found.next = new ListNode(key, value);
+        ListNode current = this.arr[index];
+        if (current == null) {
+            this.arr[index] = new ListNode(key, value);
         } else {
-            found.next.val = value;
+            ListNode prev = new ListNode(-1, -1);
+            while (current != null && key < current.key) {
+                prev = current;
+                current = current.next;
+            }
+            if (current == null) {
+                prev.next = new ListNode(key, value);
+            }
+            if (key >= current.key) {
+                ListNode newOne = new ListNode(key, value);
+                prev.next = newOne;
+                newOne.next = current;
+            }
         }
     }
 
-    private ListNode findKey(ListNode list, int key) {
-        ListNode current = list;
+    public int get(int key) {
+        int index = hash(key);
+        if (this.arr[index] == null) {
+            return -1;
+        }
+        ListNode current = this.arr[index];
+        while (current != null && current.key != key) {
+            current = current.next;
+        }
+        if (current.key == key) {
+            return current.val;
+        }
+        return -1;
+    }
+
+    public void remove(int key) {
+        int index = hash(key);
+        if (this.arr[index] == null) {
+            return;
+        }
+        ListNode current = this.arr[index];
         ListNode prev = null;
         while (current != null && current.key != key) {
             prev = current;
             current = current.next;
         }
-        return prev;
-    }
-
-    /**
-     * Returns the value to which the specified key is mapped, or -1 if this map contains no mapping for the key
-     */
-    public int get(int key) {
-        int hash = hash(key);
-        ListNode current = buckets[hash];
-        if (current == null) {
-            return -1;
-        }
-        ListNode found = findKey(current, key);
-        return found.next != null ? found.next.val : -1;
-    }
-
-    /**
-     * Removes the mapping of the specified value key if this map contains a mapping for the key
-     */
-    public void remove(int key) {
-        int hash = hash(key);
-        ListNode list = this.buckets[hash];
-        if (list == null) {
-            return;
-        }
-        ListNode prev = findKey(list, key);
-        if (prev.next == null) {
-            return;
+        if (prev == null) {
+            this.arr[index] = null;
         } else {
-            prev.next = prev.next.next;
+            ListNode prevNext = prev.next;
+            if (prevNext == null) {
+                prev.next = null;
+            } else {
+                prev.next = prevNext.next;
+            }
+
         }
     }
 
-    private int hash(int val) {
-        return Integer.hashCode(val) % SIZE;
+    private int hash(int key) {
+        return key % SIZE;
     }
 
 }

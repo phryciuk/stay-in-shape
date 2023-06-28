@@ -1,27 +1,18 @@
 package org.hryciuk.stayinshape.fundamentals.algorithms.sorting;
 
 class InsertionSort {
-    private int[] array;
 
-    public InsertionSort(int[] array) {
-        this.array = array;
-    }
-
-    public int[] getArray() {
-        return array;
-    }
-
-    public void insertionSort() {
-        for (int i = 1; i < array.length; ++i) {
-            int key = array[i];
+    public void insertionSort(int[] arr) {
+        for (int i = 1; i < arr.length; i++) {
+            int key = arr[i];
             int j = i - 1;
-            while (j >= 0 && array[j] > key) {
-                int tmp = array[j + 1];
-                array[j + 1] = array[j];
-                array[j] = tmp;
-                j--;
+
+            /* Move elements of arr[0..i-1], that are greater than key, to one position ahead of their current position */
+            while (j >= 0 && arr[j] > key) {
+                arr[j + 1] = arr[j];
+                j = j - 1;
             }
-            array[j + 1] = key;
+            arr[j + 1] = key;
         }
     }
 }

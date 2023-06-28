@@ -59,4 +59,23 @@ public class TopKFrequentElements {
         }
         return result;
     }
+
+    public int[] topKFrequent2(int[] nums, int k) {
+        Map<Integer, Integer> occurrences = new HashMap<>();
+        for (int i = 0; i < nums.length; ++i) {
+            occurrences.put(nums[i], occurrences.getOrDefault(nums[i], 0) + 1);
+        }
+        PriorityQueue<Map.Entry<Integer, Integer>> heap = new PriorityQueue<>(k, (a, b) -> b.getValue() - a.getValue()); // sort descending
+        for (Map.Entry<Integer, Integer> entry : occurrences.entrySet()) {
+            heap.add(entry);
+        }
+
+        int[] result = new int[k];
+        int index = 0;
+        while (!heap.isEmpty() && index < k) {
+            Map.Entry<Integer, Integer> entry = heap.poll();
+            result[index++] = entry.getKey();
+        }
+        return result;
+    }
 }

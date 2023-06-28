@@ -9,8 +9,8 @@ public class QuicksortHoare {
     // invoke with (0, size - 1)
     public void quickSort(int[] arr, int lo, int hi) {
         if (lo < hi) {
-            int splitIndex = partition(arr, lo, hi);
-            quickSort(arr, lo, splitIndex);
+            int splitIndex = partition2(arr, lo, hi);
+            quickSort(arr, lo, splitIndex - 1);
             quickSort(arr, splitIndex + 1, hi);
         }
     }
@@ -30,6 +30,25 @@ public class QuicksortHoare {
                 swap(arr, i, j);
             }
         }
+        return j;
+    }
+
+    private int partition2(int[] arr, int low, int high) {
+        int pivot = arr[low];
+        int i = low;
+        int j = high;
+
+        while (i < j) {
+            while (arr[i] <= pivot && i <= high - 1) {
+                i++;
+            }
+
+            while (arr[j] > pivot && j >= low + 1) {
+                j--;
+            }
+            if (i < j) swap(arr, i, j);
+        }
+        swap(arr, low, j);
         return j;
     }
 

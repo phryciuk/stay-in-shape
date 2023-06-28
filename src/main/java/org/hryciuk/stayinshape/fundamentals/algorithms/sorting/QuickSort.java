@@ -1,44 +1,44 @@
 package org.hryciuk.stayinshape.fundamentals.algorithms.sorting;
 
-class QuickSort {
-    private int[] array;
-
-    public QuickSort(int[] array) {
-        this.array = array;
+public class QuickSort {
+    public void sort(int[] arr) {
+        quickSort(arr, 0, arr.length - 1);
     }
 
-    public void quickSort(int low, int high) {
-        if (low < high) {
-            int index = partition(low, high);
-            quickSort(low, index - 1);
-            quickSort(index + 1, high);
+    // invoke with (0, size - 1)
+    public void quickSort(int[] arr, int lo, int hi) {
+        if (lo < hi) {
+            int partitionIndex = partition(arr, lo, hi);
+            quickSort(arr, lo, partitionIndex - 1);
+            quickSort(arr, partitionIndex + 1, hi);
         }
     }
 
-    // Lomuto partition scheme
-    int partition(int low, int high) {
-        int pivot = array[high];
-        int i = low - 1;
+    // after partition is executed pivot is in the right place of the sorted order
+    // not like in Hoare partition
+    private int partition(int[] arr, int lo, int hi) {
+        int pivot = arr[lo];
+        int i = lo;
+        int j = hi;
 
-        for (int j = low; j < high; ++j) {
-            if (array[j] <= pivot) {
-                ++i;
-                swap(i, j);
+        while (i < j) {
+            while(arr[i] <= pivot && i <= hi - 1) {
+                i++;
+            }
+            while(arr[j] > pivot && j >= lo + 1) {
+                j--;
+            }
+            if (i < j) {
+                swap(arr, i, j);
             }
         }
-        i++;
-        swap(i, high);
-        return i;
+        swap(arr, lo, j);
+        return j;
     }
 
-    private void swap(int i, int j) {
-        int toReplace = array[i];
-        array[i] = array[j];
-        array[j] = toReplace;
-    }
-
-
-    public int[] getArray() {
-        return array;
+    private void swap(int[] arr ,int i, int j) {
+        int tmp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = tmp;
     }
 }

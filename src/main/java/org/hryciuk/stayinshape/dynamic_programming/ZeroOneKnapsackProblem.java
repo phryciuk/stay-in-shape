@@ -134,4 +134,26 @@ public class ZeroOneKnapsackProblem {
         int profitWithItemExcluded = knapsackRecursive(weight, profit, currentCapacity, currentIndex + 1);
         return Math.max(profitWithItemExcluded, profitWithItemIncluded);
     }
+
+    public int maxProfit(int[] weights, int[] profits, int capacity) {
+        Integer[][] dp = new Integer[weights.length][capacity + 1];
+        return helper(weights, profits, capacity, 0, dp);
+    }
+
+    public int helper(int[] weights, int[] profits, int capacity, int current, Integer[][] dp) {
+        if (current >= weights.length || capacity <= 0) {
+            return 0;
+        }
+        if (dp[current][capacity] != null) {
+            return dp[current][capacity];
+        }
+        // either we include the element or exclude that
+        int included = 0;
+        if (capacity - weights[current] >= 0) {
+            included = profits[current] + helper(weights, profits, capacity - weights[current], current + 1, dp);
+        }
+        int excluded = helper(weights, profits, capacity, current + 1, dp);
+        dp[current][capacity] = Math.max(included, excluded);
+        return dp[current][capacity];
+    }
 }

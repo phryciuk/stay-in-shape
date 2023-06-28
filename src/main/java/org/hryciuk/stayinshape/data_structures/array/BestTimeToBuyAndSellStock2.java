@@ -30,26 +30,25 @@ package org.hryciuk.stayinshape.data_structures.array;
  */
 public class BestTimeToBuyAndSellStock2 {
 
-    public int maxProfit(int[] arr) {
-        if (arr == null || arr.length == 0) {
-            return 0;
-        }
-
+    // Time complexity: O(n)
+    // Space complexity: O(1)
+    public int maxProfit(int[] prices) {
         int maxProfit = 0;
-        int minIndex = 0;
-        int maxIndex = 0;
-
-        for (int i = 0; i < arr.length; ++i) {
-            if (arr[i] < arr[maxIndex]) {
-                maxProfit += arr[maxIndex] - arr[minIndex];
-                minIndex = i;
-                maxIndex = i;
+        int localMax = 0;
+        int localMin = 0;
+        for (int i = 1; i < prices.length; ++i) {
+            // we are going lower, that means that the moment to sell is already behind us
+            if (prices[i] < prices[localMax]) {
+                maxProfit += prices[localMax] - prices[localMin];
+                localMin = i;
+                localMax = i;
             }
-            if (arr[i] > arr[maxIndex]) {
-                maxIndex = i;
+            // if we are going up that means that localMax increases
+            else {
+                localMax = i;
             }
         }
-        maxProfit += arr[maxIndex] - arr[minIndex];
+        maxProfit += prices[localMax] - prices[localMin];
         return maxProfit;
     }
 

@@ -68,6 +68,8 @@ public class PalindromePartitioning2 {
             } else {
                 for (int i = 0; i <= j; ++i) {
                     if (isPalindrome[i][j]) {
+                        // is substring is palindrome, then we set minimum cuts variable for that substring.
+                        // it's gonna be either cuts needed for [0...j] substring or [0...i - 1] + 1
                         cuts[j] = Math.min(cuts[i - 1] + 1, cuts[j]);
                     }
                 }

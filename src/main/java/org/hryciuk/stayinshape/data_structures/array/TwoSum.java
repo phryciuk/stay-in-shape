@@ -17,19 +17,24 @@ import java.util.Map;
  */
 public class TwoSum {
 
+    // We keep a hashmap that stores the values and indices
+    // We iterate over values
+    // We look if number (target - current) is already present in the map
+    //      - if it is that means that we have already both numbers
+    //      - if it is not, then we just add the current value and index to the map and continue
     public int[] twoSum(int[] nums, int target) {
-        Map<Integer, Integer> map = new HashMap<>();
+        Map<Integer, Integer> valToIndex = new HashMap<>();
         for (int i = 0; i < nums.length; ++i) {
-            if (map.get(nums[i]) == null) {
-                map.put(target - nums[i], i);
-            } else {
+            if (valToIndex.containsKey(target - nums[i])) {
                 int[] result = new int[2];
-                result[0] = map.get(nums[i]);
+                result[0] = valToIndex.get(target - nums[i]);
                 result[1] = i;
                 return result;
+            } else {
+                valToIndex.put(nums[i], i);
             }
         }
-        throw new IllegalStateException("No indices that sum up to a target");
+        return new int[]{-1, -1};
     }
 
 }

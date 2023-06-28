@@ -143,4 +143,44 @@ public class ReverseWordsInAString {
             hi--;
         }
     }
+
+    public String reverseWords3(String s) {
+        String newOne = trimSpaces(s.toCharArray());
+        char[] arr = newOne.toCharArray();
+        reverse3(arr, 0, arr.length - 1);
+
+
+        for (int i = 0; i < arr.length; ++i) {
+            int start = i;
+            while (i < arr.length && arr[i] != ' ') {
+                i++;
+            }
+            reverse3(arr, start, i - 1);
+        }
+        return new String(arr);
+    }
+
+    public void reverse3(char[] arr, int lo, int hi) {
+        while (lo < hi) {
+            char tmp = arr[lo];
+            arr[lo] = arr[hi];
+            arr[hi] = tmp;
+            lo++;
+            hi--;
+        }
+    }
+
+    private String trimSpaces(char[] arr) {
+        int length = arr.length;
+        int x = 0;
+        int y = 0;
+        while (y < length) {
+            while (y < length && arr[y] == ' ') y++;
+            while (y < length && arr[y] != ' ') arr[x++] = arr[y++];
+            while (y < length && arr[y] == ' ') y++;
+            if (y < length) arr[x++] = ' ';
+        }
+
+        return new String(arr).substring(0, x);
+    }
 }

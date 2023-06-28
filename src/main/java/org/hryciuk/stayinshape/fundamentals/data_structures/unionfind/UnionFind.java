@@ -33,24 +33,21 @@ public class UnionFind {
     // find which component/set 'p' belongs to
     // takes amortized constant time
     public int find(int p) {
-        // find the root of the component/set
-        int root = p;
-        while (root != id[root]) {
-            root = id[root];
+        int parent = id[p];
+        while (parent != id[parent]) {
+            parent = id[parent];
         }
 
-        // compress the path leading back to the root.
-        // doing this operation is called "path compression"
-        // and is what gives us amortized constant time complexity.
-        while (p != root) {
-            int next = id[p];
-            id[p] = root;
-            p = next;
+        int current = p;
+        while (id[current] != parent) {
+            int next = id[current];
+            id[current] = parent;
+            current = next;
         }
-        return root;
+        return parent;
     }
 
-    // Returns whether or not the elements are in the same component/set
+    // Returns whether the elements are in the same component/set
     public boolean connected(int p, int q) {
         return find(p) == find(q);
     }
@@ -69,7 +66,7 @@ public class UnionFind {
         return hasCycle;
     }
 
-    // returns the number of cremaining components/sets
+    // returns the number of remaining components/sets
     public int components() {
         return numberOfComponents;
     }

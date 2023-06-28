@@ -3,6 +3,7 @@ package org.hryciuk.stayinshape.data_structures.linked_list;
 import java.util.HashMap;
 import java.util.Map;
 
+// HashMap + Doubly Linked List
 public class LRUCache {
 
     private final int size;

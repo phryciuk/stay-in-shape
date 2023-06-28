@@ -48,4 +48,37 @@ public class PalindromicSubstrings {
         }
         return palindromes;
     }
+
+    public int countS(String s) {
+        if (s == null || s.isEmpty()) {
+            return 0;
+        }
+        int count = 0;
+        char[] string = s.toCharArray();
+        boolean[][] isPalindrome = new boolean[string.length][string.length];
+        // 1 letter substring is always a palindrome
+        for (int i = 0; i < string.length; ++i) {
+            isPalindrome[i][i] = true;
+            count++;
+        }
+
+        // 2 letter substring is a palindrome if first and second letter are the same
+        for (int i = 1; i < string.length; ++i) {
+            if (string[i - 1] == string[i]) {
+                isPalindrome[i - 1][i] = true;
+                count++;
+            }
+        }
+
+        // 3 letter and more
+        for (int i = 2; i < string.length; ++i) {
+            for (int j = 0; j < i - 1; ++j) {
+                if (string[j] == string[i] && isPalindrome[j + 1][i - 1]) {
+                    isPalindrome[j][i] = true;
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
 }

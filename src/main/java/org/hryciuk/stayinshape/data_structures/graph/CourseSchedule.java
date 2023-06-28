@@ -48,4 +48,47 @@ public class CourseSchedule {
         }
         return totalNumberOfEdges == 0;
     }
+
+    public boolean canFinish2(int numCourses, int[][] prerequisites) {
+        Map<Integer, List<Integer>> adjacencyMap = new HashMap<>();
+        int[] indegrees = new int[numCourses];
+
+        // first we create the graph, and initialize every vertex with empty list to avoid nulls later on
+        for (int i = 0; i < numCourses; ++i) {
+            adjacencyMap.put(i, new ArrayList<>());
+        }
+
+        // create adjacency list (graph) and increase indegrees
+        for (int[] edge : prerequisites) {
+            List<Integer> adjacentNodes = adjacencyMap.get(edge[1]);
+            adjacentNodes.add(edge[0]);
+            adjacencyMap.put(edge[1], adjacentNodes);
+            indegrees[edge[0]]++;
+        }
+
+        // look for nodes with indegree == 0
+        Deque<Integer> q = new LinkedList<>();
+        for (int i = 0; i < indegrees.length; ++i) {
+            if (indegrees[i] == 0) {
+                q.add(i);
+            }
+        }
+
+        int totalNumberOfEdges = prerequisites.length;
+        while(!q.isEmpty()) {
+            Integer popped = q.pop();
+            List<Integer> edges = adjacencyMap.get(popped);
+            if (edges == null) {
+                continue;
+            }
+            for (int i = 0; i < edges.size(); ++i) {
+                indegrees[edges.get(i)]--;
+                if (indegrees[edges.get(i)] == 0) {
+                    q.add(edges.get(i));
+                }
+                totalNumberOfEdges--;
+            }
+        }
+        return totalNumberOfEdges == 0;
+    }
 }

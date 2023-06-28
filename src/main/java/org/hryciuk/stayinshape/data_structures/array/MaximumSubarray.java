@@ -14,19 +14,24 @@ public class MaximumSubarray {
         return max;
     }
 
-    public int maxSubArray(int[] nums) {
-        int runningSum = 0;
-        int maxSubArraySum = Integer.MIN_VALUE;
-        int maxNegativeNumber = Integer.MIN_VALUE;
+    public int lengthOfMaxSubarray(int[] nums) {
+        int currentMax = 0;
+        int bestMax = Integer.MIN_VALUE;
+        int start = 0;
+        int end = 0;
+        int s = 0;
         for (int i = 0; i < nums.length; ++i) {
-            if (nums[i] <= 0 && runningSum + nums[i] <= 0) {
-                runningSum = 0;
-                maxNegativeNumber = Math.max(nums[i], maxNegativeNumber);
-            } else {
-                runningSum += nums[i];
-                maxSubArraySum = Math.max(maxSubArraySum, runningSum);
+            currentMax = currentMax + nums[i];
+            if (currentMax > bestMax) {
+                end = i;
+                start = s;
+                bestMax = currentMax;
+            }
+            if (currentMax < 0) {
+                currentMax = 0;
+                s = i + 1;
             }
         }
-        return Math.max(maxNegativeNumber, maxSubArraySum);
+        return end - start + 1;
     }
 }

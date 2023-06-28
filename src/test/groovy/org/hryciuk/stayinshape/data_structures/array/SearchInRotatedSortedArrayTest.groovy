@@ -10,13 +10,16 @@ class SearchInRotatedSortedArrayTest extends Specification {
         SearchInRotatedSortedArray searchInRotatedSortedArray = new SearchInRotatedSortedArray()
 
         when:
-        def actual = searchInRotatedSortedArray.search2(input, target)
+        def actual = searchInRotatedSortedArray.searchOne(input, target)
 
         then:
         actual == expected
 
         where:
         input                 | target | expected
+        [1, 3, 5]             | 3      | 1
+        [1, 3]             | 0      | -1
+        [1, 3]             | 1      | 0
         [4, 5, 6, 7, 0, 1, 2] | 7      | 3
         [4, 5, 6, 7, 0, 1, 2] | 0      | 4
         [4, 5, 6, 7, 0, 1, 2] | 3      | -1
