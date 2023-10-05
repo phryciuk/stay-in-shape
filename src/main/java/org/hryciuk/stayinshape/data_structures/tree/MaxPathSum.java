@@ -1,8 +1,6 @@
 package org.hryciuk.stayinshape.data_structures.tree;
 
 public class MaxPathSum {
-
-    // O(n) time | O(log(n)) space
     public int maxPathSum(TreeNode root) {
         if (root == null) {
             return 0;
@@ -14,8 +12,6 @@ public class MaxPathSum {
         findMaxSumAsBranch(root, maxPathSum);
         return maxPathSum[0];
     }
-
-    // This return an array where first val is maxPathSumAsBranch, and second val is maxPathSum
     private int findMaxSumAsBranch(TreeNode root, int[] maxPathSum) {
         if (root == null) {
             return -1001;
@@ -28,5 +24,7 @@ public class MaxPathSum {
         maxPathSum[0] = Math.max(maxPathSum[0], maxSumAsRootNode);
         return maxSumAsBranch;
     }
+    // O(n) time | O(log(n)) space
+
 
 }

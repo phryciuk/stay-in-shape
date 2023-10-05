@@ -4,31 +4,23 @@ import java.util.*;
 
 public class GroupAnagrams {
     public List<List<String>> groupAnagrams(String[] strs) {
-        List<List<String>> results = new ArrayList<>();
-        if (strs == null || strs.length == 0) {
-            return results;
-        }
-        Map<String, List<String>> mapOfStrings = new HashMap<>();
-        for (int i = 0; i < strs.length; ++i) {
-            String currentOne = strs[i];
-            int[] arrayOfOccurrences = getArrayOfOccurrences(currentOne);
-            String asString = Arrays.toString(arrayOfOccurrences);
-            if (mapOfStrings.containsKey(asString)) {
-                mapOfStrings.get(asString).add(currentOne);
-            } else {
-                List<String> newList = new ArrayList<>();
-                newList.add(currentOne);
-                mapOfStrings.put(asString, newList);
+        Map<String, List<String>> keyToGroup = new HashMap<>();
+        for (String current : strs) {
+            char[] arrayOfOccurrences = getArrayOfOccurrences(current);
+            String createdKey = Arrays.toString(arrayOfOccurrences);
+            if (!keyToGroup.containsKey(createdKey)) {
+                keyToGroup.put(createdKey, new ArrayList<>());
             }
+            keyToGroup.get(createdKey).add(current);
         }
-        return new ArrayList<>(mapOfStrings.values());
+        return new ArrayList<>(keyToGroup.values());
     }
 
-    int[] getArrayOfOccurrences(String str) {
-        char[] chars = str.toCharArray();
-        int[] occurrences = new int[26];
+    char[] getArrayOfOccurrences(String str) {
+        char[] arr = str.toCharArray();
+        char[] occurrences = new char[26];
         for (int i = 0; i < str.length(); ++i) {
-            char currentChar = chars[i];
+            char currentChar = arr[i];
             occurrences[currentChar - 'a']++;
         }
         return occurrences;

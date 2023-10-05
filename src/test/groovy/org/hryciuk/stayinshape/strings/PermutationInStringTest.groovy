@@ -8,7 +8,7 @@ class PermutationInStringTest extends Specification {
         PermutationInString permutation = new PermutationInString()
 
         when:
-        boolean actual = permutation.checkInclusion(s1, s2)
+        boolean actual = permutation.checkInclusion3(s1, s2)
 
         then:
         actual == expected

@@ -1,8 +1,6 @@
 package org.hryciuk.stayinshape.data_structures.heap;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.PriorityQueue;
+import java.util.*;
 
 /**
  * 347. Top K Frequent Elements
@@ -29,37 +27,42 @@ import java.util.PriorityQueue;
  */
 public class TopKFrequentElements {
 
+    //Time complexity: O(n)
+    //Space complexity: O(n)
     public int[] topKFrequent(int[] nums, int k) {
-        if (k < 1) {
-            throw new IllegalArgumentException();
-        }
-        Map<Integer, Integer> mapOfOccurrences = new HashMap<>();
+        Map<Integer, Integer> count = new HashMap<>();
+
         for (int i = 0; i < nums.length; ++i) {
-            mapOfOccurrences.put(nums[i], mapOfOccurrences.getOrDefault(nums[i], 0) + 1);
+            count.put(nums[i], count.getOrDefault(nums[i], 0) + 1);
         }
 
-        PriorityQueue<Map.Entry<Integer, Integer>> minHeap = new PriorityQueue<>(k, (a, b) -> a.getValue() - b.getValue());
+        List<List<Integer>> frequencies = new ArrayList<>(nums.length + 1);
+        for (int i = 0; i < nums.length + 1; ++i) {
+            List<Integer> newList = new ArrayList<>();
+            frequencies.add(i, newList);
+        }
 
-        for (Map.Entry<Integer, Integer> entry : mapOfOccurrences.entrySet()) {
-            if (minHeap.size() < k) {
-                minHeap.add(entry);
-            } else {
-                if (entry.getValue() > minHeap.peek().getValue()) {
-                    minHeap.poll();
-                    minHeap.add(entry);
-                }
-            }
+        for (Map.Entry<Integer, Integer> entry : count.entrySet()) {
+            frequencies.get(entry.getValue()).add(entry.getKey());
         }
 
         int[] result = new int[k];
-        int i = 0;
-        while (!minHeap.isEmpty()) {
-            result[i] = minHeap.poll().getKey();
-            ++i;
+        int j = 0;
+        for (int i = nums.length; i >= 0; i--) {
+            if (!frequencies.get(i).isEmpty()) {
+                for (int n : frequencies.get(i)) {
+                    result[j++] = n;
+                    if (j == k) {
+                        return result;
+                    }
+                }
+            }
         }
         return result;
     }
 
+    // Time complexity: O(k logn)
+    // Space complexity: O(n)
     public int[] topKFrequent2(int[] nums, int k) {
         Map<Integer, Integer> occurrences = new HashMap<>();
         for (int i = 0; i < nums.length; ++i) {
@@ -75,6 +78,39 @@ public class TopKFrequentElements {
         while (!heap.isEmpty() && index < k) {
             Map.Entry<Integer, Integer> entry = heap.poll();
             result[index++] = entry.getKey();
+        }
+        return result;
+    }
+
+    public int[] topKFrequent3(int[] nums, int k) {
+        Map<Integer, Integer> frequencies = new HashMap<>();
+
+        for (int i = 0; i < nums.length; ++i) {
+            int current = nums[i];
+            frequencies.put(current, frequencies.getOrDefault(current, 0) + 1);
+        }
+
+        int[] result = new int[k];
+        List<Integer>[] list = new List[nums.length + 1];
+        // initialize with empty lists
+        for (int i = 0; i < nums.length + 1; ++i) {
+            list[i] = new ArrayList<>();
+        }
+
+        for (Map.Entry<Integer, Integer> entry : frequencies.entrySet()) {
+            list[entry.getValue()].add(entry.getKey());
+        }
+
+        int index = 0;
+        for (int i = list.length - 1; i >= 0; i--) {
+            if (!list[i].isEmpty()) {
+                for (int e : list[i]) {
+                    result[index++] = e;
+                    if (index == k) {
+                        return result;
+                    }
+                }
+            }
         }
         return result;
     }

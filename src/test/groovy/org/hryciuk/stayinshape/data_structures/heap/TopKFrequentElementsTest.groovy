@@ -9,7 +9,7 @@ class TopKFrequentElementsTest extends Specification {
         TopKFrequentElements topKFrequentElements = new TopKFrequentElements()
 
         when:
-        def actual = topKFrequentElements.topKFrequent2(input, k)
+        def actual = topKFrequentElements.topKFrequent3(input, k)
 
         then:
         Arrays.asList(actual).size() == expected.length
@@ -17,6 +17,7 @@ class TopKFrequentElementsTest extends Specification {
 
         where:
         input                                                                       | k | expected
+        [1]                                                                         | 1 | [1]
         [1, 1, 1, 2, 2, 3]                                                          | 2 | [1, 2]
         [1, 1, 1, 2, 2, 3, 3, 3, 3, 3, 31, 2, 5, 2, 2, 2, 2, 6, 44, 3, 6, 7, 8, 42] | 2 | [2, 3]
         [5, 6, 3, 7, 1, 3, 2, 6, 3, 6, 9]                                           | 4 | [5, 2, 3, 6]

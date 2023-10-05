@@ -8,25 +8,22 @@ public class LongestConsecutiveSequence {
 
     // time O(n) | space O(n)
     public int longestConsecutive2(int[] nums) {
-        if (nums == null || nums.length == 0) {
-            return 0;
-        }
-        int longest = 1;
         Set<Integer> set = new HashSet<>();
         for (int i = 0; i < nums.length; ++i) {
             set.add(nums[i]);
         }
-
-        for (int current : set) {
-            if (!set.contains(current - 1)) {
-                int next = current + 1;
-                while(set.contains(next)) {
-                    next = next + 1;
-                }
-                longest = Math.max(longest, next - current);
+        int max = 0;
+        for (int i = 0; i < nums.length; ++i) {
+            if (set.contains(nums[i] - 1)) {
+                continue;
             }
+            int length = 0;
+            while (set.contains(nums[i] + length)) {
+                length++;
+            }
+            max = Math.max(max, length);
         }
-        return longest;
+        return max;
     }
 
     // time O(n log(n)) | space O(1)

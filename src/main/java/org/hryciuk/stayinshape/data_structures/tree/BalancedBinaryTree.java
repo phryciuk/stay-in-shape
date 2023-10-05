@@ -44,23 +44,19 @@ public class BalancedBinaryTree {
         if (root == null) {
             return true;
         }
-        boolean[] isNonBalanced = new boolean[1];
-        int left = height(root.left, isNonBalanced);
-        int right = height(root.right, isNonBalanced);
-        if (Math.abs(left - right) > 1) {
-            return false;
-        }
-        return !isNonBalanced[0];
+        boolean[] isBalanced = new boolean[]{true};
+        height(root, isBalanced);
+        return isBalanced[0];
     }
 
-    int height(TreeNode root, boolean[] isNonBalanced) {
+    int height(TreeNode root, boolean[] isBalanced) {
         if (root == null ) {
             return 0;
         }
-        int left = height(root.left, isNonBalanced);
-        int right = height(root.right, isNonBalanced);
+        int left = height(root.left, isBalanced);
+        int right = height(root.right, isBalanced);
         if (Math.abs(left - right) > 1) {
-            isNonBalanced[0] = true;
+            isBalanced[0] = false;
         }
         return Math.max(left, right) + 1;
     }

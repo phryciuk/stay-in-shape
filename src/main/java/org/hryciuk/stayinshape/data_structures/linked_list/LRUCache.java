@@ -7,22 +7,22 @@ import java.util.Map;
 public class LRUCache {
 
     private final int size;
-    Map<Integer, Node> map;
-    private Node head;
-    private Node tail;
+    Map<Integer, CacheNode> map;
+    private CacheNode head;
+    private CacheNode tail;
 
     public LRUCache(int capacity) {
         size = capacity;
         map = new HashMap<>();
-        this.head = new Node();
-        this.tail = new Node();
+        this.head = new CacheNode();
+        this.tail = new CacheNode();
         head.next = tail;
         tail.prev = head;
     }
 
     public int get(int key) {
         int result = -1;
-        Node node = map.get(key);
+        CacheNode node = map.get(key);
         if (node != null) {
             result = node.value;
             remove(node);
@@ -32,7 +32,7 @@ public class LRUCache {
     }
 
     public void put(int key, int value) {
-        Node node = map.get(key);
+        CacheNode node = map.get(key);
         if (node != null) {
             remove(node);
             node.value = value;
@@ -44,7 +44,7 @@ public class LRUCache {
                                            // Otherwise you are removing wrong element from the map
                 remove(tail.prev);
             }
-            Node newOne = new Node();
+            CacheNode newOne = new CacheNode();
             newOne.key = key;
             newOne.value = value;
             add(newOne);
@@ -52,25 +52,25 @@ public class LRUCache {
         }
     }
 
-    private void add(Node node) {
-        Node next = head.next;
+    private void add(CacheNode node) {
+        CacheNode next = head.next;
         head.next = node;
         node.next = next;
         next.prev = node;
         node.prev = head;
     }
 
-    private void remove(Node node) {
-        Node prevNode = node.prev;
-        Node nextNode = node.next;
-        prevNode.next = nextNode;
-        nextNode.prev = prevNode;
+    private void remove(CacheNode node) {
+        CacheNode prevCacheNode = node.prev;
+        CacheNode nextCacheNode = node.next;
+        prevCacheNode.next = nextCacheNode;
+        nextCacheNode.prev = prevCacheNode;
     }
 }
 
-class Node {
-    Node next;
-    Node prev;
+class CacheNode {
+    CacheNode next;
+    CacheNode prev;
     int value;
     int key;
 }

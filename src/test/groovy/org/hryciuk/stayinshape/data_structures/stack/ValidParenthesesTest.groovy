@@ -8,7 +8,7 @@ class ValidParenthesesTest extends Specification {
         ValidParentheses validParentheses = new ValidParentheses()
 
         when:
-        boolean actual = validParentheses.isValid(input)
+        boolean actual = validParentheses.isValid2(input)
 
         then:
         actual == expected
@@ -21,5 +21,6 @@ class ValidParenthesesTest extends Specification {
         "([)]"  || false
         "{[]}"  || true
         "(("    || false
+        "]"     || false
     }
 }

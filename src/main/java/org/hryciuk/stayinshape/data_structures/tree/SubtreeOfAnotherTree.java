@@ -1,37 +1,25 @@
 package org.hryciuk.stayinshape.data_structures.tree;
 
 public class SubtreeOfAnotherTree {
-    public boolean isSubtree(TreeNode s, TreeNode t) {
-        return inorderDfs(s, t);
-    }
-
-    private boolean inorderDfs(TreeNode s, TreeNode t) {
-        if (s == null) {
-            return false;
-        }
-        boolean left = inorderDfs(s.left, t);
-        if (s.val == t.val) {
-            boolean result = isIdenticalSubtree(s, t);
-            if (result) {
-                return true;
-            }
-        }
-        boolean right = inorderDfs(s.right, t);
-        return left || right;
-    }
-
-    private boolean isIdenticalSubtree(TreeNode s, TreeNode t) {
-        if (s == null && t == null) {
+    public boolean isSubtree(TreeNode p, TreeNode q) {
+        if (q == null) {
             return true;
         }
-        if (s == null || t == null) {
+        if (p == null) {
             return false;
         }
-        boolean left = isIdenticalSubtree(s.left, t.left);
-        if (s.val != t.val) {
-            return false;
+        if (isSameTree(p, q)) {
+            return true;
         }
-        boolean right = isIdenticalSubtree(s.right, t.right);
-        return left && right;
+        return isSubtree(p.left, q) || isSubtree(p.right, q);
+    }
+
+    private boolean isSameTree(TreeNode p, TreeNode q) {
+        if (p != null && q != null && p.val == q.val) {
+            return isSameTree(p.left, q.left) && isSameTree(p.right, q.right);
+        } else if (p == null && q == null) {
+            return true;
+        }
+        return false;
     }
 }

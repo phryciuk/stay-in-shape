@@ -5,20 +5,19 @@ import java.util.Map;
 
 public class LongestRepeatingCharacterReplacement {
     public int characterReplacement(String s, int k) {
-        int startOfWindow = 0;
-        int lengthOfMaxRepeatingCharacter = 0;
+        int l = 0;
+        Map<Character, Integer> occurrences = new HashMap<>();
+        int maxCharFrequency = 0;
+        char[] arr = s.toCharArray();
         int maxLength = 0;
-        Map<Character, Integer> charOccurrences = new HashMap<>();
-        for (int endOfWindow = 0; endOfWindow < s.length(); ++endOfWindow) {
-            char rightChar = s.charAt(endOfWindow);
-            charOccurrences.put(rightChar, charOccurrences.getOrDefault(rightChar, 0) + 1);
-            lengthOfMaxRepeatingCharacter = Math.max(lengthOfMaxRepeatingCharacter, charOccurrences.get(rightChar));
-            if (endOfWindow - startOfWindow - lengthOfMaxRepeatingCharacter + 1 > k) {
-                char leftChar = s.charAt(startOfWindow);
-                charOccurrences.put(leftChar, charOccurrences.get(leftChar) - 1);
-                startOfWindow++;
+        for (int r = 0; r < arr.length; ++r) {
+            occurrences.put(arr[r], occurrences.getOrDefault(arr[r], 0) + 1);
+            maxCharFrequency = Math.max(maxCharFrequency, occurrences.get(arr[r]));
+            if (r - l + 1 - maxCharFrequency > k) {
+                occurrences.put(arr[l], occurrences.getOrDefault(arr[l], 0) - 1);
+                l++;
             }
-            maxLength = Math.max(maxLength, endOfWindow - startOfWindow + 1);
+            maxLength = Math.max(maxLength, r - l + 1);
         }
         return maxLength;
     }

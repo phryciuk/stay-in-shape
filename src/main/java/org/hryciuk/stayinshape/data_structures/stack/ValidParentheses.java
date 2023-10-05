@@ -1,8 +1,6 @@
 package org.hryciuk.stayinshape.data_structures.stack;
 
-import java.util.Deque;
-import java.util.LinkedList;
-import java.util.Stack;
+import java.util.*;
 
 /**
  * 20. Valid Parentheses
@@ -43,6 +41,27 @@ import java.util.Stack;
  * Output: true
  */
 public class ValidParentheses {
+
+    public boolean isValid2(String s) {
+        char[] arr = s.toCharArray();
+        Map<Character, Character> map = new HashMap<>();
+        map.put(']', '[');
+        map.put(')', '(');
+        map.put('}', '{');
+        Deque<Character> stack = new LinkedList<>();
+        for (int i = 0; i < arr.length; ++i) {
+            if (map.containsKey(arr[i])) {
+                if (!stack.isEmpty() && stack.peek() == map.get(arr[i])) {
+                    stack.pop();
+                } else {
+                    return false;
+                }
+            } else {
+                stack.push(arr[i]);
+            }
+        }
+        return stack.isEmpty();
+    }
 
     public boolean isValid(String s) {
         Stack<Character> stack = new Stack<>();

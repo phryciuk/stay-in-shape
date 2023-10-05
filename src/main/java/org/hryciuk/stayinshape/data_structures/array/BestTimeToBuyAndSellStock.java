@@ -7,7 +7,24 @@ package org.hryciuk.stayinshape.data_structures.array;
  */
 public class BestTimeToBuyAndSellStock {
 
+
     public int maxProfit(int[] prices) {
+        int maxProfit = 0;
+        int l = 0;
+        int r = l + 1;
+        while (r < prices.length) {
+            if (prices[r] > prices[l]) {
+                int profit = prices[r] - prices[l];
+                maxProfit = Math.max(maxProfit, profit);
+            } else {
+                l = r;
+            }
+            r++;
+        }
+        return maxProfit;
+    }
+
+    public int maxProfit2(int[] prices) {
         if (prices.length <= 1) {
             return 0;
         }
@@ -31,5 +48,6 @@ public class BestTimeToBuyAndSellStock {
 
         return result == 0 ? maxPrice - minPrice : result;
     }
+
 
 }

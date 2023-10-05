@@ -9,17 +9,18 @@ class MinimumWindowSubstringTest extends Specification {
         MinimumWindowSubstring minimumWindowSubstring = new MinimumWindowSubstring()
 
         when:
-        String actual = minimumWindowSubstring.minWindow(input, pattern)
+        String actual = minimumWindowSubstring.minWindow2(input, pattern)
 
         then:
         actual == expected;
 
         where:
-        input           | pattern | expected
-        "AABDEC"        | "ABC"   | "ABDEC"
-        "ADOBECODEBANC" | "ABC"   | "BANC"
-        "SIEMA"         | "ABC"   | ""
-        "A"             | "A"     | "A"
-        "a"             | "a"     | "a"
+        input               | pattern | expected
+        "AABDEC"            | "ABC"   | "ABDEC"
+        "ADOBECODEBANC"     | "ABC"   | "BANC"
+        "SIEMA"             | "ABC"   | ""
+        "A"                 | "A"     | "A"
+        "a"                 | "a"     | "a"
+        "cabwefgewcwaefgcf" | "cae"   | "cwae"
     }
 }

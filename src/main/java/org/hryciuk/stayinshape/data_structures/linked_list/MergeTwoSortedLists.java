@@ -9,44 +9,26 @@ package org.hryciuk.stayinshape.data_structures.linked_list;
  * Output: 1->1->2->3->4->4
  */
 class MergeTwoSortedLists {
-  public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
-    ListNode currentL1 = l1;
-    ListNode currentL2 = l2;
-    ListNode newHead = null;
+  public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
+    ListNode dummy = new ListNode(-1);
+    ListNode current = dummy;
 
-    if (currentL1 == null) {
-      if (currentL2 == null) {
-        return null;
-      }
-      return currentL2;
-    }
-    if (currentL2 == null) {
-      return currentL1;
-    }
-
-    if (currentL1.val <= currentL2.val) {
-      newHead = currentL1;
-    } else {
-      newHead = currentL2;
-    }
-
-    while (currentL1 != null && currentL2 != null) {
-      if (currentL1.val <= currentL2.val) {
-        while (currentL1.next != null && currentL1.next.val <= currentL2.val) {
-          currentL1 = currentL1.next;
-        }
-        ListNode nextOne = currentL1.next;
-        currentL1.next = currentL2;
-        currentL1 = nextOne;
+    while (list1 != null && list2 != null) {
+      if (list1.val < list2.val) {
+        current.next = list1;
+        list1 = list1.next;
       } else {
-        while (currentL2.next != null && currentL2.next.val <= currentL1.val) {
-          currentL2 = currentL2.next;
-        }
-        ListNode nextOne = currentL2.next;
-        currentL2.next = currentL1;
-        currentL2 = nextOne;
+        current.next = list2;
+        list2 = list2.next;
       }
+      current = current.next;
     }
-    return newHead;
+
+    if (list1 != null) {
+      current.next = list1;
+    } else if (list2 != null) {
+      current.next = list2;
+    }
+    return dummy.next;
   }
 }

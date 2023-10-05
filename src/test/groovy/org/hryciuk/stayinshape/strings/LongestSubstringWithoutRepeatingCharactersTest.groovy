@@ -8,7 +8,7 @@ class LongestSubstringWithoutRepeatingCharactersTest extends Specification {
         LongestSubstringWithoutRepeatingCharacters longestSubstringWithoutRepeatingCharacters = new LongestSubstringWithoutRepeatingCharacters()
 
         when:
-        int actual = longestSubstringWithoutRepeatingCharacters.lengthOfLongestSubstring2(input)
+        int actual = longestSubstringWithoutRepeatingCharacters.lengthOfLongestSubstring(input)
 
         then:
         actual == expected
@@ -16,6 +16,7 @@ class LongestSubstringWithoutRepeatingCharactersTest extends Specification {
         where:
         input      | expected
         ""         | 0
+        " "        | 1
         "abcabcbb" | 3
         "bbbbbbb"  | 1
         "pwwkew"   | 3

@@ -23,18 +23,15 @@ public class TwoSum {
     //      - if it is that means that we have already both numbers
     //      - if it is not, then we just add the current value and index to the map and continue
     public int[] twoSum(int[] nums, int target) {
-        Map<Integer, Integer> valToIndex = new HashMap<>();
+        Map<Integer, Integer> map = new HashMap<>();
         for (int i = 0; i < nums.length; ++i) {
-            if (valToIndex.containsKey(target - nums[i])) {
-                int[] result = new int[2];
-                result[0] = valToIndex.get(target - nums[i]);
-                result[1] = i;
-                return result;
-            } else {
-                valToIndex.put(nums[i], i);
+            int diff = target - nums[i];
+            if (map.containsKey(diff)) {
+                return new int[] {map.get(diff), i};
             }
+            map.put(nums[i], i);
         }
-        return new int[]{-1, -1};
+        return new int[] {-1, -1};
     }
 
 }

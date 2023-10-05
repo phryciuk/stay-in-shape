@@ -1,11 +1,32 @@
 package org.hryciuk.stayinshape.strings;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 public class LongestSubstringWithoutRepeatingCharacters {
 
     public int lengthOfLongestSubstring(String s) {
+        if (s.length() == 0) {
+            return 0;
+        }
+        Set<Character> set = new HashSet<>();
+        int maxLength = 0;
+        int l = 0;
+        for (int r = 0; r < s.length(); ++r) {
+            char current = s.charAt(r);
+            while (set.contains(current)) {
+                set.remove(s.charAt(l));
+                l++;
+            }
+            set.add(current);
+            maxLength = Math.max(maxLength, r - l + 1);
+        }
+        return maxLength;
+    }
+
+    public int lengthOfLongestSubstring2(String s) {
         int startOfWindow = 0;
         int maxLengthOfSubstringWithoutRepeatingCharacters = 0;
         Map<Character, Integer> characterToIndexOfLastOccurrence = new HashMap<>();
@@ -35,7 +56,7 @@ public class LongestSubstringWithoutRepeatingCharacters {
         return maxLengthOfSubstringWithoutRepeatingCharacters;
     }
 
-    public int lengthOfLongestSubstring2(String s) {
+    public int lengthOfLongestSubstring3(String s) {
         if (s == null || s.length() == 0) {
             return 0;
         }
